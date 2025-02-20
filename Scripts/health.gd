@@ -14,9 +14,4 @@ func damage(amount):
 		i += 1
 	#Check if they are dead
 	if(health <= 0):
-		print("DEAD")
-
-func _input(event):
-	if event is InputEventMouseButton:
-		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-			damage(1)
+		get_parent().queue_free()
