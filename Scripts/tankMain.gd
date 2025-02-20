@@ -27,6 +27,7 @@ func hurt(amount):
 #Move button pressed, send signal to the tile map to work out which nodes are moveable
 func _on_move_button_pressed() -> void:
 	map.find_moveable_tiles(self.global_position)
-	
+
+##Will need to be changed to move over time so it looks nicer. Can be done with lerping
 func move(location):
 	self.global_position = location
