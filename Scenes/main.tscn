@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwlt5jiinjx0v"]
+
+[ext_resource type="PackedScene" uid="uid://lrv4egxiycyw" path="res://Scenes/map.tscn" id="1_1xu0y"]
+[ext_resource type="PackedScene" uid="uid://doxpjwtdt4abe" path="res://Prefabs/player.tscn" id="2_n6fc8"]
+
+[node name="MAIN" type="Node2D"]
+
+[node name="TileMapLayer" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_1xu0y")]
+player = NodePath("../Player")
+
+[node name="Player" parent="." node_paths=PackedStringArray("map") instance=ExtResource("2_n6fc8")]
+position = Vector2(33, 224)
+map = NodePath("../TileMapLayer")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Move Button" type="Button" parent="CanvasLayer"]
+offset_left = 693.0
+offset_top = 23.0
+offset_right = 748.0
+offset_bottom = 54.0
+text = "MOVE"
+
+[connection signal="pressed" from="CanvasLayer/Move Button" to="Player" method="_on_move_button_pressed"]

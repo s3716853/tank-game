@@ -1,9 +1,14 @@
 extends TileMapLayer
 
 var grid = Array()
-var grid_width = 7
-var grid_height = 7
+@export var grid_width = 7
+@export var grid_height = 7
 var tiles
+
+#Player tank. Used to move send signal to move player
+@export var player = Node2D
+#Tiles which can be moved to
+var moveable = []
 
 var tile_scene = preload("res://Prefabs/tile.tscn")
 # Called when the node enters the scene tree for the first time.
@@ -35,6 +40,25 @@ func _ready():
 		
 	print(grid)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func find_moveable_tiles(player_position):
+	#Reset moveable tiles
+	moveable = []
+	var player_grid_pos = local_to_map(player_position)
+	for column in grid_width:
+		moveable.append(grid[column][player_grid_pos.y])
+	for row in grid_height:
+		moveable.append(grid[player_grid_pos.x][row])
+	
+	#Turn on moveable tiles
+	for tile in moveable:
+		tile.visible = true
+		
+#A tile has been clicked on and the tank will be moved to the tile
+func tile_clicked(location):
+	#For all the currently visible tile nodes, turn them off
+	for tile in moveable:
+		tile.visible = false
+	moveable = []
+	
+	#Move player to tile
+	player.move(map_to_local(location))
