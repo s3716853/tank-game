@@ -14,4 +14,5 @@ func damage(amount):
 		i += 1
 	#Check if they are dead
 	if(health <= 0):
+		print("YOU LOSE")
 		get_parent().queue_free()
