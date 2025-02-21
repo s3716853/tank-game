@@ -10,6 +10,7 @@ size = Vector2(62, 62)
 script = ExtResource("1_26ja5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.47451)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_jaxpe")
 
@@ -19,8 +20,12 @@ texture = ExtResource("2_jaxpe")
 shape = SubResource("RectangleShape2D_r05ly")
 
 [node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+modulate = Color(1, 0.207843, 1, 1)
+offset_left = -16.0
+offset_top = -37.0
+offset_right = 22.0
+offset_bottom = 32.0
+theme_override_font_sizes/font_size = 50
 text = "1"
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

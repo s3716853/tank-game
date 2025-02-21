@@ -93,8 +93,11 @@ func tile_clicked(location):
 	
 	#Move player to tile
 	player.move(map_to_local(location))
+	tile_heuristics(map_to_local(location))
 	
 func tile_heuristics(player_position):
+	for child in get_children():
+		child.heuristic = null
 	var player_grid_pos = local_to_map(player_position)
 #	players pos = 0
 	grid[player_grid_pos.x][player_grid_pos.y].heuristic = 0
@@ -152,18 +155,21 @@ func tile_heuristics(player_position):
 			for cell in cardinal_cells:
 				if cell.x >= 0 && cell.x <= grid_width - 1 && cell.y >= 0 && cell.y <= grid_height - 1:
 					if !grid[cell.x][cell.y].heuristic:
-						empty_values.append(grid[cell.x][cell.y])
-						var values = get_surrounding_cells(cell)
-						var lowest
-						for value in values:
-							if value.x >= 0 && value.x <= grid_width - 1 && value.y >= 0 && value.y <= grid_height - 1:
-								if grid[value.x][value.y].heuristic:
-									if !lowest:
-										lowest = grid[value.x][value.y].heuristic
-									else:
-										if grid[value.x][value.y].heuristic < lowest:
+						if !grid[cell.x][cell.y].cell_empty:
+							grid[cell.x][cell.y].heuristic = 100
+						else:
+							empty_values.append(grid[cell.x][cell.y])
+							var values = get_surrounding_cells(cell)
+							var lowest
+							for value in values:
+								if value.x >= 0 && value.x <= grid_width - 1 && value.y >= 0 && value.y <= grid_height - 1:
+									if grid[value.x][value.y].heuristic:
+										if !lowest:
 											lowest = grid[value.x][value.y].heuristic
-						grid[cell.x][cell.y].heuristic = lowest + 1
+										else:
+											if grid[value.x][value.y].heuristic < lowest:
+												lowest = grid[value.x][value.y].heuristic
+							grid[cell.x][cell.y].heuristic = lowest + 1
 					
 		neighbours = empty_values
 					
@@ -173,4 +179,6 @@ func tile_heuristics(player_position):
 				can_move_on = false
 #	test output
 	for child in get_children():
+		child.find_child("Label").text = str(child.heuristic)
 		print(child.location, child.heuristic)
+		child.visible = true

@@ -6,6 +6,8 @@
 [node name="MAIN" type="Node2D"]
 
 [node name="TileMapLayer" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_1xu0y")]
+grid_width = 8
+grid_height = 8
 player = NodePath("../Player")
 
 [node name="Player" parent="." node_paths=PackedStringArray("map") instance=ExtResource("2_n6fc8")]
