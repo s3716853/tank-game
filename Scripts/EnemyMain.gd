@@ -10,16 +10,27 @@ var max_actions = 1
 #Current actions remaining for the enemy
 var actions_remaining = 1
 
+func _ready():
+	#Sets starting position cells to be not empty
+	get_parent().enemy_locations(null,self.position)
+
 #Choose an action to do
 func action_choice():
 	#For now it just shoots, this will be changed eventually
 	shoot(Vector2.LEFT)
-	
 #Hurt Tank
 #Sends signal to child which handles the tank health
 func hurt(amount):
 	find_child("Health").damage(amount)
+
+#Called when an enemy moves
+func move(location : Vector2):
+	#Sets the old grid cell_empty to true and the new cell_empty to false
+	get_parent().enemy_locations(self.position, location)
+	#MOVE to location
+	#TODO
 	
+#Called when an enemy shoots
 func shoot(direction):
 	#Set turret direction
 	turret.rotation = direction.angle()
