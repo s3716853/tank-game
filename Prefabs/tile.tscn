@@ -7,6 +7,7 @@
 size = Vector2(62, 62)
 
 [node name="TileNode" type="Node2D"]
+visible = false
 script = ExtResource("1_26ja5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -3,6 +3,7 @@ extends TileMapLayer
 var grid = Array()
 @export var grid_width = 8
 @export var grid_height = 3
+@export var move_distance = 3
 var tiles
 
 #Player tank. Used to move send signal to move player
@@ -13,6 +14,7 @@ var moveable = []
 var tile_scene = preload("res://Prefabs/tile.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#move_distance += 1
 	tiles = get_used_cells()
 	var xmax = 0
 	var ymax = 0
@@ -57,7 +59,7 @@ func find_moveable_tiles(player_position):
 	var player_grid_pos = local_to_map(player_position)
 	var x = player_grid_pos.x
 	#Check all cells to the left of player
-	while x >= 0:
+	while x >= 0 && x >= player_grid_pos.x - move_distance:
 		#If there isn't a wall continue, otherwise stop
 		if(grid[x][player_grid_pos.y].cell_empty):
 			moveable.append(grid[x][player_grid_pos.y])
@@ -66,7 +68,7 @@ func find_moveable_tiles(player_position):
 		x -= 1
 	#Check all cells to the right of the player
 	x = player_grid_pos.x
-	while x < grid_width:
+	while x < grid_width && x <= player_grid_pos.x + move_distance:
 		#If there isn't a wall continue, otherwise stop
 		if(grid[x][player_grid_pos.y].cell_empty):
 			moveable.append(grid[x][player_grid_pos.y])
@@ -75,7 +77,7 @@ func find_moveable_tiles(player_position):
 		x += 1
 	#Check all cells to the top of player
 	var y = player_grid_pos.y
-	while y >= 0:
+	while y >= 0 && y >= player_grid_pos.y - move_distance:
 		#If there isn't a wall continue, otherwise stop
 		if(grid[player_grid_pos.x][y].cell_empty):
 			moveable.append(grid[player_grid_pos.x][y])
@@ -84,7 +86,7 @@ func find_moveable_tiles(player_position):
 		y -= 1
 	#Check all cells to the right of the player
 	y = player_grid_pos.y
-	while y < grid_height:
+	while y < grid_height && y <= player_grid_pos.y + move_distance:
 		#If there isn't a wall continue, otherwise stop
 		if(grid[player_grid_pos.x][y].cell_empty):
 			moveable.append(grid[player_grid_pos.x][y])
@@ -192,4 +194,4 @@ func tile_heuristics(player_position):
 	for child in get_children():
 		child.find_child("Label").text = str(child.heuristic)
 		print(child.location, child.heuristic)
-		child.visible = true
+		#child.visible = true
