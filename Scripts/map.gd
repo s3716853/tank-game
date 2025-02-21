@@ -155,6 +155,9 @@ func tile_heuristics(player_position):
 	for tile in straight_shot:
 		tile.heuristic = 1
 	
+#	set player's pos heuristic = 0
+	grid[player_grid_pos.x][player_grid_pos.y].heuristic = 0
+	
 	var neighbours = straight_shot
 	var empty_values = []
 	
