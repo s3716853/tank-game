@@ -14,3 +14,8 @@ func enemy_turn():
 	for child in get_children():
 		child.actions_remaining = child.max_actions
 		child.action_choice()
+
+func _process(delta: float) -> void:
+	#If there are no enemy tanks remaining then the player wins
+	if(get_child_count() == 0):
+		print("YOU WIN!")
