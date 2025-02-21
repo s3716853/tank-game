@@ -181,10 +181,9 @@ func tile_heuristics(player_position):
 			if !child.heuristic:
 				can_move_on = false
 #	test output
-	#for child in get_children():
-		#child.find_child("Label").text = str(child.heuristic)
-		#print(child.location, child.heuristic)
-		#child.visible = true
+	for child in get_children():
+		child.find_child("Label").text = str(child.heuristic)
+		print(child.location, child.heuristic)
 
 func set_cell_empty(old_position, location):
 	if(old_position != null):

@@ -6,11 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://doxpjwtdt4abe" path="res://Prefabs/player.tscn" id="2_n6fc8"]
 [ext_resource type="Script" path="res://Scripts/EnemyHandler.gd" id="3_87fwr"]
 
-[node name="MAIN" type="Node2D" node_paths=PackedStringArray("EnemyHandler", "Player", "Map")]
+[node name="MAIN" type="Node2D" node_paths=PackedStringArray("EnemyHandler", "Player", "Map", "UI")]
 script = ExtResource("1_nlw84")
 EnemyHandler = NodePath("Enemy Handler")
 Player = NodePath("Player")
 Map = NodePath("TileMapLayer")
+UI = NodePath("CanvasLayer")
 
 [node name="TileMapLayer" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_1xu0y")]
 grid_width = 8
