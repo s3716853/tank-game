@@ -21,7 +21,6 @@ texture = ExtResource("2_jaxpe")
 shape = SubResource("RectangleShape2D_r05ly")
 
 [node name="Label" type="Label" parent="."]
-visible = false
 modulate = Color(1, 0.207843, 1, 1)
 offset_left = -16.0
 offset_top = -37.0

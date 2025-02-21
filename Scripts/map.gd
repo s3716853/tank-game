@@ -1,8 +1,9 @@
 extends TileMapLayer
 
 var grid = Array()
-@export var grid_width = 7
-@export var grid_height = 7
+@export var grid_width = 8
+@export var grid_height = 3
+@export var move_distance = 3
 var tiles
 
 #Player tank. Used to move send signal to move player
@@ -13,6 +14,18 @@ var moveable = []
 var tile_scene = preload("res://Prefabs/tile.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#move_distance += 1
+	tiles = get_used_cells()
+	var xmax = 0
+	var ymax = 0
+	for cell in tiles:
+		if cell.x > xmax:
+			xmax = cell.x
+		if cell.y > ymax:
+			ymax = cell.y
+	grid_width = xmax + 1
+	grid_height = ymax + 1
+	
 #	inititates 2d array
 	grid.resize(grid_height)
 	for i in range(grid_height):
@@ -21,7 +34,7 @@ func _ready():
 		for j in range(grid_width):
 			grid[i][j] = 0
 			
-	tiles = get_used_cells()
+	
 	for tile in tiles:
 		var scene = tile_scene.instantiate()
 		add_child(scene)
@@ -46,7 +59,7 @@ func find_moveable_tiles(player_position):
 	var player_grid_pos = local_to_map(player_position)
 	var x = player_grid_pos.x
 	#Check all cells to the left of player
-	while x >= 0:
+	while x >= 0 && x >= player_grid_pos.x - move_distance:
 		#If there isn't a wall continue, otherwise stop
 		if(grid[x][player_grid_pos.y].cell_empty):
 			moveable.append(grid[x][player_grid_pos.y])
@@ -55,7 +68,7 @@ func find_moveable_tiles(player_position):
 		x -= 1
 	#Check all cells to the right of the player
 	x = player_grid_pos.x
-	while x < grid_width:
+	while x < grid_width && x <= player_grid_pos.x + move_distance:
 		#If there isn't a wall continue, otherwise stop
 		if(grid[x][player_grid_pos.y].cell_empty):
 			moveable.append(grid[x][player_grid_pos.y])
@@ -64,7 +77,7 @@ func find_moveable_tiles(player_position):
 		x += 1
 	#Check all cells to the top of player
 	var y = player_grid_pos.y
-	while y >= 0:
+	while y >= 0 && y >= player_grid_pos.y - move_distance:
 		#If there isn't a wall continue, otherwise stop
 		if(grid[player_grid_pos.x][y].cell_empty):
 			moveable.append(grid[player_grid_pos.x][y])
@@ -73,7 +86,7 @@ func find_moveable_tiles(player_position):
 		y -= 1
 	#Check all cells to the right of the player
 	y = player_grid_pos.y
-	while y < grid_height:
+	while y < grid_height && y <= player_grid_pos.y + move_distance:
 		#If there isn't a wall continue, otherwise stop
 		if(grid[player_grid_pos.x][y].cell_empty):
 			moveable.append(grid[player_grid_pos.x][y])
@@ -145,6 +158,9 @@ func tile_heuristics(player_position):
 	for tile in straight_shot:
 		tile.heuristic = 1
 	
+#	set player's pos heuristic = 0
+	grid[player_grid_pos.x][player_grid_pos.y].heuristic = 0
+	
 	var neighbours = straight_shot
 	var empty_values = []
 	
@@ -180,6 +196,7 @@ func tile_heuristics(player_position):
 		for child in get_children():
 			if !child.heuristic:
 				can_move_on = false
+
 #	test output
 	for child in get_children():
 		child.find_child("Label").text = str(child.heuristic)
