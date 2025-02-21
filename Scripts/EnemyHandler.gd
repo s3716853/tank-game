@@ -11,10 +11,10 @@ func enemy_finished():
 		get_parent().set_player_turn()
 
 
-func enemy_turn():
-	for child in get_children():
+func enemy_turn(map, player_coord: Vector2):
+	for child : EnemyMain in get_children():
 		child.actions_remaining = child.max_actions
-		child.action_choice()
+		child.action_choice(map, player_coord)
 
 func _process(delta: float) -> void:
 	#If there are no enemy tanks remaining then the player wins
