@@ -7,6 +7,7 @@
 size = Vector2(62, 62)
 
 [node name="TileNode" type="Node2D"]
+visible = false
 script = ExtResource("1_26ja5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -20,6 +21,7 @@ texture = ExtResource("2_jaxpe")
 shape = SubResource("RectangleShape2D_r05ly")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 modulate = Color(1, 0.207843, 1, 1)
 offset_left = -16.0
 offset_top = -37.0
