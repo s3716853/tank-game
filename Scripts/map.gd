@@ -38,7 +38,7 @@ func _ready():
 		
 		grid[tile.x][tile.y] = scene
 		
-	print(grid)
+	tile_heuristics(player.position)
 
 func find_moveable_tiles(player_position):
 	#Reset moveable tiles
@@ -93,3 +93,84 @@ func tile_clicked(location):
 	
 	#Move player to tile
 	player.move(map_to_local(location))
+	
+func tile_heuristics(player_position):
+	var player_grid_pos = local_to_map(player_position)
+#	players pos = 0
+	grid[player_grid_pos.x][player_grid_pos.y].heuristic = 0
+	var straight_shot = []
+	var x = player_grid_pos.x
+	#Check all cells to the left of player
+	while x >= 0:
+		#If there isn't a wall continue, otherwise stop
+		if(grid[x][player_grid_pos.y].cell_empty):
+			straight_shot.append(grid[x][player_grid_pos.y])
+		else:
+			break
+		x -= 1
+	#Check all cells to the right of the player
+	x = player_grid_pos.x
+	while x < grid_width:
+		#If there isn't a wall continue, otherwise stop
+		if(grid[x][player_grid_pos.y].cell_empty):
+			straight_shot.append(grid[x][player_grid_pos.y])
+		else:
+			break
+		x += 1
+	#Check all cells to the top of player
+	var y = player_grid_pos.y
+	while y >= 0:
+		#If there isn't a wall continue, otherwise stop
+		if(grid[player_grid_pos.x][y].cell_empty):
+			straight_shot.append(grid[player_grid_pos.x][y])
+		else:
+			break
+		y -= 1
+	#Check all cells to the right of the player
+	y = player_grid_pos.y
+	while y < grid_height:
+		#If there isn't a wall continue, otherwise stop
+		if(grid[player_grid_pos.x][y].cell_empty):
+			straight_shot.append(grid[player_grid_pos.x][y])
+		else:
+			break
+		y += 1
+		
+	for tile in straight_shot:
+		tile.heuristic = 1
+	
+	var neighbours = straight_shot
+	var empty_values = []
+	
+	var can_move_on = false
+	while !can_move_on:
+		empty_values = []
+		var cardinal_cells = []
+		for neighbour in neighbours:
+			cardinal_cells = get_surrounding_cells(neighbour.location)
+			
+			for cell in cardinal_cells:
+				if cell.x >= 0 && cell.x <= grid_width - 1 && cell.y >= 0 && cell.y <= grid_height - 1:
+					if !grid[cell.x][cell.y].heuristic:
+						empty_values.append(grid[cell.x][cell.y])
+						var values = get_surrounding_cells(cell)
+						var lowest
+						for value in values:
+							if value.x >= 0 && value.x <= grid_width - 1 && value.y >= 0 && value.y <= grid_height - 1:
+								if grid[value.x][value.y].heuristic:
+									if !lowest:
+										lowest = grid[value.x][value.y].heuristic
+									else:
+										if grid[value.x][value.y].heuristic < lowest:
+											lowest = grid[value.x][value.y].heuristic
+						grid[cell.x][cell.y].heuristic = lowest + 1
+					
+		neighbours = empty_values
+					
+		can_move_on = true
+		for child in get_children():
+			if !child.heuristic:
+				can_move_on = false
+#	test output
+	for child in get_children():
+		print(child.location, child.heuristic)

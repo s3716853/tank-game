@@ -1,7 +1,13 @@
 extends Node2D
 
+# bool that shows if tile has an obstacle inside or not
 var cell_empty
+
+# Vector2i that is the tiles location on the map
 var location
+
+# number that describes the tile's proximity to a straight shot on the player
+var heuristic
 
 var mouse_over = false
 #Mouse is hovering over

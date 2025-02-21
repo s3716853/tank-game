@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwlt5jiinjx0v"]
+[gd_scene load_steps=3 format=3 uid="uid://cxv5cctmbhaj6"]
 
-[ext_resource type="PackedScene" uid="uid://lrv4egxiycyw" path="res://Scenes/map.tscn" id="1_1xu0y"]
-[ext_resource type="PackedScene" uid="uid://doxpjwtdt4abe" path="res://Prefabs/player.tscn" id="2_n6fc8"]
+[ext_resource type="PackedScene" uid="uid://c46p7e1fdftbq" path="res://Scenes/map.tscn" id="1_1xu0y"]
+[ext_resource type="PackedScene" uid="uid://bkrr1ob1b8rhf" path="res://Prefabs/player.tscn" id="2_n6fc8"]
 
 [node name="MAIN" type="Node2D"]
 
