@@ -1,59 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://dkcq3id4fjgbk"]
+[gd_scene load_steps=3 format=3 uid="uid://dkcq3id4fjgbk"]
 
-[ext_resource type="Script" path="res://Scripts/tankMain.gd" id="1_hncku"]
 [ext_resource type="PackedScene" uid="uid://doxpjwtdt4abe" path="res://Prefabs/player.tscn" id="1_tosbj"]
-[ext_resource type="Script" path="res://Scripts/health.gd" id="3_8rin5"]
-[ext_resource type="Texture2D" uid="uid://doqgsbyrna1ce" path="res://Sprites/heart.png" id="4_1mdos"]
-[ext_resource type="Texture2D" uid="uid://pu5p8uc6tfi2" path="res://Sprites/Enemy Tanks/body1.png" id="6_txu1l"]
-[ext_resource type="Texture2D" uid="uid://dqegvqs4tbkjl" path="res://Sprites/Enemy Tanks/turret1.png" id="7_jftf7"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s01wh"]
-size = Vector2(61, 54)
+[ext_resource type="PackedScene" uid="uid://bstiq4wdcauyl" path="res://Prefabs/enemy.tscn" id="2_1qio7"]
 
 [node name="Scene" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_tosbj")]
 
-[node name="Enemy" type="Node2D" parent="." node_paths=PackedStringArray("bullet_spawn")]
-position = Vector2(-137, 76)
-script = ExtResource("1_hncku")
-bullet_spawn = NodePath("Body/Turret/BulletSpawn")
-
-[node name="Body" type="Sprite2D" parent="Enemy"]
-texture_filter = 1
-texture = ExtResource("6_txu1l")
-
-[node name="Turret" type="Sprite2D" parent="Enemy/Body"]
-texture_filter = 1
-rotation = -6.36108
-texture = ExtResource("7_jftf7")
-
-[node name="BulletSpawn" type="Node2D" parent="Enemy/Body/Turret"]
-position = Vector2(31.3847, 0.0271924)
-
-[node name="Area2D" type="Area2D" parent="Enemy" groups=["Enemy"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/Area2D"]
-position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_s01wh")
-
-[node name="Health" type="Node2D" parent="Enemy"]
-script = ExtResource("3_8rin5")
-
-[node name="Heart 1" type="Sprite2D" parent="Enemy/Health"]
-texture_filter = 1
-position = Vector2(-10, -34)
-texture = ExtResource("4_1mdos")
-
-[node name="Heart 2" type="Sprite2D" parent="Enemy/Health"]
-texture_filter = 1
-position = Vector2(0, -34)
-texture = ExtResource("4_1mdos")
-
-[node name="Heart 3" type="Sprite2D" parent="Enemy/Health"]
-texture_filter = 1
-position = Vector2(10, -34)
-texture = ExtResource("4_1mdos")
+[node name="Enemy" parent="." instance=ExtResource("2_1qio7")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 rotation = -0.0140881
