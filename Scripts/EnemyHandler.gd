@@ -11,9 +11,11 @@ func enemy_finished():
 		get_parent().set_player_turn()
 
 
-func enemy_turn():
-	for child in get_children():
+func enemy_turn(map, player_coord: Vector2):
+	for child : EnemyMain in get_children():
 		child.actions_remaining = child.max_actions
+		child.map = map
+		child.player_coord = player_coord
 		child.action_choice()
 
 func _process(delta: float) -> void:
