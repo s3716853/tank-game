@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxv5cctmbhaj6"]
+[gd_scene load_steps=6 format=3 uid="uid://dwlt5jiinjx0v"]
 
-[ext_resource type="PackedScene" uid="uid://c46p7e1fdftbq" path="res://Scenes/map.tscn" id="1_1xu0y"]
-[ext_resource type="PackedScene" uid="uid://bkrr1ob1b8rhf" path="res://Prefabs/player.tscn" id="2_n6fc8"]
+[ext_resource type="PackedScene" uid="uid://lrv4egxiycyw" path="res://Scenes/map.tscn" id="1_1xu0y"]
+[ext_resource type="PackedScene" uid="uid://bstiq4wdcauyl" path="res://Prefabs/enemy.tscn" id="1_dxpu0"]
+[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_nlw84"]
+[ext_resource type="PackedScene" uid="uid://doxpjwtdt4abe" path="res://Prefabs/player.tscn" id="2_n6fc8"]
+[ext_resource type="Script" path="res://Scripts/EnemyHandler.gd" id="3_87fwr"]
 
-[node name="MAIN" type="Node2D"]
+[node name="MAIN" type="Node2D" node_paths=PackedStringArray("EnemyHandler", "Player")]
+script = ExtResource("1_nlw84")
+EnemyHandler = NodePath("Enemy Handler")
+Player = NodePath("Player")
 
 [node name="TileMapLayer" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_1xu0y")]
 grid_width = 8
@@ -30,6 +36,13 @@ offset_right = 757.0
 offset_bottom = 103.0
 text = "SHOOT
 "
+
+[node name="Enemy Handler" type="Node2D" parent="."]
+script = ExtResource("3_87fwr")
+
+[node name="Enemy" parent="Enemy Handler" instance=ExtResource("1_dxpu0")]
+z_index = 1
+position = Vector2(416, 96)
 
 [connection signal="pressed" from="CanvasLayer/Move Button" to="Player" method="_on_move_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Shoot Button" to="Player" method="_on_shoot_button_pressed"]
