@@ -1,8 +1,8 @@
 extends TileMapLayer
 
 var grid = Array()
-@export var grid_width = 7
-@export var grid_height = 7
+@export var grid_width = 8
+@export var grid_height = 3
 var tiles
 
 #Player tank. Used to move send signal to move player
@@ -13,6 +13,17 @@ var moveable = []
 var tile_scene = preload("res://Prefabs/tile.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	tiles = get_used_cells()
+	var xmax = 0
+	var ymax = 0
+	for cell in tiles:
+		if cell.x > xmax:
+			xmax = cell.x
+		if cell.y > ymax:
+			ymax = cell.y
+	grid_width = xmax + 1
+	grid_height = ymax + 1
+	
 #	inititates 2d array
 	grid.resize(grid_height)
 	for i in range(grid_height):
@@ -21,7 +32,7 @@ func _ready():
 		for j in range(grid_width):
 			grid[i][j] = 0
 			
-	tiles = get_used_cells()
+	
 	for tile in tiles:
 		var scene = tile_scene.instantiate()
 		add_child(scene)
@@ -177,8 +188,8 @@ func tile_heuristics(player_position):
 		for child in get_children():
 			if !child.heuristic:
 				can_move_on = false
-#	test output
-	#for child in get_children():
-		#child.find_child("Label").text = str(child.heuristic)
-		#print(child.location, child.heuristic)
-		#child.visible = true
+	#test output
+	for child in get_children():
+		child.find_child("Label").text = str(child.heuristic)
+		print(child.location, child.heuristic)
+		child.visible = true
