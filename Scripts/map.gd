@@ -80,17 +80,20 @@ func find_moveable_tiles(player_position):
 		else:
 			break
 		y += 1
+	grid[player_grid_pos.x][player_grid_pos.y].cell_empty = false
 	#Turn on moveable tiles
 	for tile in moveable:
-		tile.visible = true
+		if(tile.cell_empty):
+			tile.visible = true
 		
+	
 #A tile has been clicked on and the tank will be moved to the tile
 func tile_clicked(location):
+	grid[local_to_map(player.position).x][local_to_map(player.position).y].cell_empty = true
 	#For all the currently visible tile nodes, turn them off
 	for tile in moveable:
 		tile.visible = false
 	moveable = []
-	
 	#Move player to tile
 	player.move(map_to_local(location))
 	tile_heuristics(map_to_local(location))
@@ -182,3 +185,8 @@ func tile_heuristics(player_position):
 		#child.find_child("Label").text = str(child.heuristic)
 		#print(child.location, child.heuristic)
 		#child.visible = true
+
+func set_cell_empty(old_position, location):
+	if(old_position != null):
+		grid[local_to_map(old_position).x][local_to_map(old_position).y].cell_empty = true
+	grid[local_to_map(location).x][local_to_map(location).y].cell_empty = false

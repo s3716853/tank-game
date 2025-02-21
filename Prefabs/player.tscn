@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bkrr1ob1b8rhf"]
+[gd_scene load_steps=9 format=3 uid="uid://doxpjwtdt4abe"]
 
 [ext_resource type="Script" path="res://Scripts/tankMain.gd" id="1_tj6g3"]
 [ext_resource type="Texture2D" uid="uid://wi538ngwk4ut" path="res://Sprites/Player Tank/body.png" id="2_yx6lo"]
