@@ -1,6 +1,12 @@
 extends Node
 
-var UI : CanvasLayer
+#All buttons. Turn off during enemy turns
+@export var UI_buttons : CanvasLayer
+#Move and Shoot buttons
+@export var action_buttons : Control
+#Cancel button
+@export var cancel_button : Control
+
 var bullet = preload("res://Prefabs/bullet.tscn")
 @export var bullet_spawn = Node2D
 #Node handling the tiles which can be moved to
@@ -28,8 +34,6 @@ var body_direction = Vector2.RIGHT
 
 func _ready():
 	actions_remaining = max_actions
-	#UI buttons
-	UI = find_child("CanvasLayer")
 	
 var t = 0
 var t2 = 0
@@ -71,10 +75,11 @@ func _process(delta: float) -> void:
 func hurt(amount):
 	find_child("Health").damage(amount)
 
-#Move button pressed, send signal to the tile map to work out which nodes are moveable
+#Move button pressed
 func _on_move_button_pressed() -> void:
 	#Turns off buttons so only one action can be taken
-	UI_change(false)
+	UI_change(true,false,true)
+	#Work out which nodes are moveable
 	map.find_moveable_tiles(self.global_position)
 
 #Set move location to node position and then move over time in func _process
@@ -82,17 +87,12 @@ func move(location):
 	target_location = location
 	t = 0
 	body_rotated = false
-
-#Shoot button pressed, send signal to the tile map to work out which direction
+#Shoot button sends signal here
 func _on_shoot_button_pressed() -> void:
 	arrows.visible = true
 	#Turns off buttons so only one action can be taken
-	UI_change(false)
-#Rotate turret smootly
-func rotate_turret(d):
-	t2 = 0
-	direction = d
-	turret_rotated = false
+	UI_change(true,false, true)
+#Shoots bullet
 func shoot():
 	#Spawning bullet and setting it to shoot from the "BulletSpawn" position
 	var b = bullet.instantiate()
@@ -100,26 +100,42 @@ func shoot():
 	b.global_position = bullet_spawn.global_position
 	b.global_rotation = turret.global_rotation
 	action_taken()
-
-#Called to set the turn to the player's
-func player_turn():
-	actions_remaining = max_actions
-	#Turns on action buttons
-	UI_change(true)
-#Once an action is taken, check if any actions remain. If they don't, set it to be the enemy turn
+	
+#Called once an action is taken
 func action_taken():
 	get_parent().player_turn = false
 	actions_remaining -= 1
+	#If no actions remain then end the turn
 	if(actions_remaining == 0):
 		get_parent().set_enemy_turn()
 	else:
 		#Turns on action buttons
-		UI_change(true)
+		UI_change(true, true, false)	
+#Rotate turret smootly
+func rotate_turret(d):
+	t2 = 0
+	direction = d
+	turret_rotated = false
+#Called to set the turn to the player's
+func player_turn():
+	actions_remaining = max_actions
+	#Turns on action buttons
+	UI_change(true,true,false)
 	
 func tank_destroyed():
 	print("You Lose")
 	queue_free()
 	
-#Turn UI buttons on/off
-func UI_change(visiblity):
-	UI.visible = visiblity
+#Turn UI on/off
+func UI_change(canvas, action, cancel):
+	UI_buttons.visible = canvas
+	action_buttons.visible = action
+	cancel_button.visible = cancel
+
+#Cancel action
+func _on_cancel_button_pressed() -> void:
+	UI_change(true,true,false)
+	#Turn off shoot arrows
+	arrows.visible = false
+	#Turn off moveable tiles
+	map.moveable_visibility(false)

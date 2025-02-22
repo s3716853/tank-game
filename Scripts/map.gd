@@ -118,8 +118,7 @@ func find_moveable_tiles(player_position):
 func tile_clicked(location):
 	grid[local_to_map(player.position).x][local_to_map(player.position).y].cell_empty = true
 	#For all the currently visible tile nodes, turn them off
-	for tile in moveable:
-		tile.visible = false
+	moveable_visibility(false)
 	moveable = []
 	#Move player to tile
 	player.move(map_to_local(location))
@@ -219,3 +218,9 @@ func set_cell_empty(old_position, location):
 	if(old_position != null):
 		grid[local_to_map(old_position).x][local_to_map(old_position).y].cell_empty = true
 	grid[local_to_map(location).x][local_to_map(location).y].cell_empty = false
+
+#Turn moveable tiles on/off
+func moveable_visibility(visibility):
+	#For all the currently visible tile nodes, turn them off
+	for tile in moveable:
+		tile.visible = visibility
