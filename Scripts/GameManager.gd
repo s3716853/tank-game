@@ -4,8 +4,18 @@ extends Node
 @export var Player : Node2D
 @export var Map : TileMapLayer
 @export var UI : CanvasLayer
+
+var map_folder = "res://Scenes/Maps/"
+var player_prefab = preload("res://Prefabs/player.tscn")
 #Called when the player has no actions remaining
 #Tells the Enemy Handler node that its the enemies' turn
+func _ready():
+	Player = player_prefab.instantiate()
+	add_child(Player)
+	Player.position = Map.player_spawn.position
+	Player.map = Map
+	EnemyHandler.spawn_enemies(Map.enemy_spawn)
+
 func set_enemy_turn():
 	UI.visible = false
 	await get_tree().create_timer(1).timeout 
@@ -14,8 +24,17 @@ func set_enemy_turn():
 func set_player_turn():
 	await get_tree().create_timer(1).timeout 
 	UI.visible = true
-	Player.player_turn()
+	if is_instance_valid(Player):
+		Player.player_turn()
+	else:
+		print("Game Over")
+		set_map("map")
 
 #Updates the cell_empty for nodes that an enemy is occupying
 func enemy_location(old_position, new_position):
 	Map.set_cell_empty(old_position, new_position)
+	
+func set_map(map_number: String):
+	var new_map = load(map_folder + map_number + ".tscn")
+	Map.queue_free()
+	Map = new_map.instantiate()

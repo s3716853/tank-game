@@ -2,6 +2,7 @@ extends Node
 
 var enemies_finished = 0
 
+var enemy_prefab = preload("res://Prefabs/enemy.tscn")
 
 #Check if all enemies have finished their turn, if they have change to the player's turn
 func enemy_finished():
@@ -31,3 +32,9 @@ func _process(delta: float) -> void:
 func enemy_locations(current_location, new_location):
 	for child in get_children():
 		get_parent().enemy_location(current_location, new_location)
+		
+func spawn_enemies(spawn_locations: Array):
+	for location in spawn_locations:
+		var enemy = enemy_prefab.instantiate()
+		add_child(enemy)
+		enemy.position = location.position

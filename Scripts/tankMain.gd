@@ -3,7 +3,7 @@ extends Node
 var bullet = preload("res://Prefabs/bullet.tscn")
 @export var bullet_spawn = Node2D
 #Node handling the tiles which can be moved to
-@export var map = Node2D
+var map = Node2D
 #Child node containing the arrow buttons to choose which direction to shoot
 @export var arrows : Node2D
 #Turret child, used to set the direction of the turret for shooting
@@ -61,3 +61,6 @@ func action_taken():
 	if(actions_remaining == 0):
 		get_parent().set_enemy_turn()
 	
+func tank_destroyed():
+	print("You Lose")
+	queue_free()

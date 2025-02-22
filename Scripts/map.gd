@@ -6,6 +6,9 @@ var grid = Array()
 @export var move_distance = 3
 var tiles
 
+var player_spawn
+var enemy_spawn = []
+
 #Player tank. Used to move send signal to move player
 @export var player = Node2D
 #Tiles which can be moved to
@@ -48,10 +51,22 @@ func _ready():
 #		wall
 		elif type == Vector2i(1, 0):
 			scene.cell_empty = false
+			
+#		player spawn
+		elif type == Vector2i(2, 0):
+			scene.cell_empty = true
+			player_spawn = scene
+			set_cell(tile, 0, Vector2i(0, 0))
+			
+#		enemy spawn
+		elif type == Vector2i(3, 0):
+			scene.cell_empty = false
+			enemy_spawn.append(scene)
+			set_cell(tile, 0, Vector2i(0, 0))
 		
 		grid[tile.x][tile.y] = scene
 		
-	tile_heuristics(player.position)
+	tile_heuristics(player_spawn.position)
 
 func find_moveable_tiles(player_position):
 	#Reset moveable tiles
