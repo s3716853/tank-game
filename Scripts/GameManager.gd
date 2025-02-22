@@ -13,6 +13,7 @@ func _ready():
 	add_child(Player)
 	Player.position = Map.player_spawn.position
 	Player.map = Map
+	Map.player = Player
 	EnemyHandler.spawn_enemies(Map.enemy_spawn)
 
 func set_enemy_turn():
