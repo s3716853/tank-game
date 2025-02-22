@@ -3,7 +3,6 @@ extends Node
 @export var EnemyHandler : Node2D
 @export var Player : Node2D
 @export var Map : TileMapLayer
-@export var UI : CanvasLayer
 
 var map_folder = "res://Scenes/Maps/"
 var player_prefab = preload("res://Prefabs/player.tscn")
@@ -22,7 +21,6 @@ func set_enemy_turn():
 
 func set_player_turn():
 	await get_tree().create_timer(1).timeout 
-	UI.visible = true
 	if is_instance_valid(Player):
 		Player.player_turn()
 	else:
