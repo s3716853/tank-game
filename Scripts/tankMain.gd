@@ -28,7 +28,6 @@ var body_direction = Vector2.RIGHT
 
 func _ready():
 	actions_remaining = max_actions
-	target_location = self.global_position
 	#UI buttons
 	UI = find_child("CanvasLayer")
 	
