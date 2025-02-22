@@ -11,10 +11,7 @@ var player_prefab = preload("res://Prefabs/player.tscn")
 func _ready():
 	Player = player_prefab.instantiate()
 	add_child(Player)
-	Player.position = Map.player_spawn.position
-	Player.map = Map
-	Map.player = Player
-	EnemyHandler.spawn_enemies(Map.enemy_spawn)
+	start_level()
 
 func set_enemy_turn():
 	await get_tree().create_timer(1).timeout 
@@ -36,3 +33,11 @@ func set_map(map_number: String):
 	var new_map = load(map_folder + map_number + ".tscn")
 	Map.queue_free()
 	Map = new_map.instantiate()
+	add_child(Map)
+	start_level()
+	
+func start_level():
+	Player.position = Map.player_spawn.position
+	Player.map = Map
+	Map.player = Player
+	EnemyHandler.spawn_enemies(Map.enemy_spawn)

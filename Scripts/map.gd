@@ -30,11 +30,11 @@ func _ready():
 	grid_height = ymax + 1
 	
 #	inititates 2d array
-	grid.resize(grid_height)
-	for i in range(grid_height):
+	grid.resize(grid_width)
+	for i in range(grid_width):
 		grid[i] = Array()
-		grid[i].resize(grid_width)
-		for j in range(grid_width):
+		grid[i].resize(grid_height)
+		for j in range(grid_height):
 			grid[i][j] = 0
 			
 	
