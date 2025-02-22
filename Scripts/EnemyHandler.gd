@@ -2,6 +2,8 @@ extends Node
 
 var enemies_finished = 0
 
+var enemy_amount = 0
+
 var enemy_prefab = preload("res://Prefabs/enemy.tscn")
 
 #Check if all enemies have finished their turn, if they have change to the player's turn
@@ -21,8 +23,8 @@ func enemy_turn(map, player_coord: Vector2):
 
 func _process(delta: float) -> void:
 	#If there are no enemy tanks remaining then the player wins
-	if(get_child_count() == 0):
-		print("YOU WIN!")
+	if(enemy_amount <= 0):
+		get_parent().end_level()
 		
 #Sets the cell_empty = false for every enemy position
 #this is called once at the start of the game and then every enemy move
@@ -35,6 +37,10 @@ func enemy_locations(current_location, new_location):
 		
 func spawn_enemies(spawn_locations: Array):
 	for location in spawn_locations:
+		enemy_amount += 1
 		var enemy = enemy_prefab.instantiate()
 		add_child(enemy)
 		enemy.position = location.position
+		
+func tank_destroyed():
+	enemy_amount -= 1

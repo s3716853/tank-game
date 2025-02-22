@@ -1,15 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwlt5jiinjx0v"]
+[gd_scene load_steps=3 format=3 uid="uid://dwlt5jiinjx0v"]
 
-[ext_resource type="PackedScene" uid="uid://c46p7e1fdftbq" path="res://Scenes/Maps/map.tscn" id="1_1xu0y"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_nlw84"]
 [ext_resource type="Script" path="res://Scripts/EnemyHandler.gd" id="3_87fwr"]
 
-[node name="MAIN" type="Node2D" node_paths=PackedStringArray("EnemyHandler", "Map")]
+[node name="MAIN" type="Node2D" node_paths=PackedStringArray("EnemyHandler")]
 script = ExtResource("1_nlw84")
 EnemyHandler = NodePath("Enemy Handler")
-Map = NodePath("TileMapLayer")
-
-[node name="TileMapLayer" parent="." instance=ExtResource("1_1xu0y")]
 
 [node name="Enemy Handler" type="Node2D" parent="."]
 script = ExtResource("3_87fwr")

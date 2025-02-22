@@ -129,6 +129,7 @@ func _process(delta: float) -> void:
 			body_rotated = true		
 #Called when the tank is destroyed
 func tank_destroyed():
+	get_parent().tank_destroyed()
 	var pos = map.local_to_map(self.position)
 	map.grid[pos.x][pos.y].cell_empty = true
 	queue_free()

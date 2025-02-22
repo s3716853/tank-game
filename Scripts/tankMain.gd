@@ -103,6 +103,7 @@ func shoot():
 	
 #Called once an action is taken
 func action_taken():
+	get_parent().player_turn = false
 	actions_remaining -= 1
 	#If no actions remain then end the turn
 	if(actions_remaining == 0):
