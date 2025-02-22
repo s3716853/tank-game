@@ -130,7 +130,26 @@ icon = ExtResource("6_ol1cb")
 flat = true
 icon_alignment = 1
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Move Button" type="Button" parent="CanvasLayer"]
+offset_left = 693.0
+offset_top = 23.0
+offset_right = 748.0
+offset_bottom = 54.0
+text = "MOVE"
+
+[node name="Shoot Button" type="Button" parent="CanvasLayer"]
+offset_left = 693.0
+offset_top = 72.0
+offset_right = 757.0
+offset_bottom = 103.0
+text = "SHOOT
+"
+
 [connection signal="pressed" from="Arrows/UP" to="Arrows" method="_on_up_pressed"]
 [connection signal="pressed" from="Arrows/RIGHT" to="Arrows" method="_on_right_pressed"]
 [connection signal="pressed" from="Arrows/DOWN" to="Arrows" method="_on_down_pressed"]
 [connection signal="pressed" from="Arrows/LEFT" to="Arrows" method="_on_left_pressed"]
+[connection signal="pressed" from="CanvasLayer/Move Button" to="." method="_on_move_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Shoot Button" to="." method="_on_shoot_button_pressed"]

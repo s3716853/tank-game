@@ -17,7 +17,6 @@ func _ready():
 	EnemyHandler.spawn_enemies(Map.enemy_spawn)
 
 func set_enemy_turn():
-	UI.visible = false
 	await get_tree().create_timer(1).timeout 
 	EnemyHandler.enemy_turn(Map, Map.local_to_map(Player.target_location))
 

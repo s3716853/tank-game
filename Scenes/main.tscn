@@ -8,26 +8,8 @@
 script = ExtResource("1_nlw84")
 EnemyHandler = NodePath("Enemy Handler")
 Map = NodePath("TileMapLayer")
-UI = NodePath("CanvasLayer")
 
 [node name="TileMapLayer" parent="." instance=ExtResource("1_1xu0y")]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Move Button" type="Button" parent="CanvasLayer"]
-offset_left = 693.0
-offset_top = 23.0
-offset_right = 748.0
-offset_bottom = 54.0
-text = "MOVE"
-
-[node name="Shoot Button" type="Button" parent="CanvasLayer"]
-offset_left = 693.0
-offset_top = 72.0
-offset_right = 757.0
-offset_bottom = 103.0
-text = "SHOOT
-"
 
 [node name="Enemy Handler" type="Node2D" parent="."]
 script = ExtResource("3_87fwr")
