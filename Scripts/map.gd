@@ -108,7 +108,6 @@ func find_moveable_tiles(player_position):
 		else:
 			break
 		y += 1
-	grid[player_grid_pos.x][player_grid_pos.y].cell_empty = false
 	#Turn on moveable tiles
 	for tile in moveable:
 		if(tile.cell_empty):

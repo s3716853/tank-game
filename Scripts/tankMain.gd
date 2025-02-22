@@ -108,6 +108,7 @@ func player_turn():
 	UI_change(true)
 #Once an action is taken, check if any actions remain. If they don't, set it to be the enemy turn
 func action_taken():
+	get_parent().player_turn = false
 	actions_remaining -= 1
 	if(actions_remaining == 0):
 		get_parent().set_enemy_turn()
