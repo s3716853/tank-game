@@ -3,6 +3,7 @@ extends Node
 @export var EnemyHandler : Node2D
 @export var Player : Node2D
 @export var Map : TileMapLayer
+@export var ResetButton : TextureButton
 
 var level_over
 var player_turn
@@ -44,6 +45,14 @@ func end_level():
 	map_number += 1
 	level_over = true
 
+#Turns on the reset button
+func game_over():
+	ResetButton.visible = true
+#Reset Button Clicked
+func _on_restart_button_pressed() -> void:
+	ResetButton.visible = false
+	reset_game()
+#Resets the game
 func reset_game():
 	EnemyHandler.game_over()
 	Map.queue_free()
