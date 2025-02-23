@@ -24,7 +24,7 @@ func enemy_turn(map, player_coord: Vector2):
 func _process(delta: float) -> void:
 	#If there are no enemy tanks remaining then the player wins
 	if(enemy_amount <= 0):
-		get_parent().end_level()
+		get_parent().round_won()
 		
 #Sets the cell_empty = false for every enemy position
 #this is called once at the start of the game and then every enemy move
