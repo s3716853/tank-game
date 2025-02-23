@@ -108,7 +108,7 @@ func action_taken():
 	get_parent().player_turn = false
 	actions_remaining -= 1
 	#If no actions remain then end the turn
-	if(actions_remaining == 0):
+	if(actions_remaining <= 0):
 		get_parent().set_enemy_turn()
 	else:
 		#Turns on action buttons
@@ -143,3 +143,9 @@ func _on_cancel_button_pressed() -> void:
 	arrows.visible = false
 	#Turn off moveable tiles
 	map.moveable_visibility(false)
+
+#Ends turn early
+func _on_end_turn_pressed() -> void:
+	UI_change(true, false, false)
+	actions_remaining = 0
+	action_taken()
