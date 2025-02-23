@@ -15,3 +15,6 @@ func damage(amount):
 	#Check if they are dead
 	if(health <= 0):
 		get_parent().tank_destroyed()
+#Keeps the hearts rotated correctly
+func _process(_delta):
+	self.global_rotation = 0.0

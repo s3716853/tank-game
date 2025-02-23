@@ -9,3 +9,7 @@ EnemyHandler = NodePath("Enemy Handler")
 
 [node name="Enemy Handler" type="Node2D" parent="."]
 script = ExtResource("3_87fwr")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(306, 259)
+zoom = Vector2(1.1, 1.1)

@@ -38,15 +38,15 @@ script = ExtResource("4_abefa")
 
 [node name="Heart 1" type="Sprite2D" parent="Health"]
 texture_filter = 1
-position = Vector2(-10, -34)
+position = Vector2(-10, -30)
 texture = ExtResource("5_h8lqd")
 
 [node name="Heart 2" type="Sprite2D" parent="Health"]
 texture_filter = 1
-position = Vector2(0, -34)
+position = Vector2(0, -30)
 texture = ExtResource("5_h8lqd")
 
 [node name="Heart 3" type="Sprite2D" parent="Health"]
 texture_filter = 1
-position = Vector2(10, -34)
+position = Vector2(10, -30)
 texture = ExtResource("5_h8lqd")

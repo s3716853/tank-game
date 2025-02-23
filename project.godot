@@ -23,3 +23,5 @@ Player=""
 [rendering]
 
 renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0.85098, 0.627451, 0.4, 1)
+environment/transparent_background=false
