@@ -4,6 +4,7 @@ var grid = Array()
 @export var grid_width = 8
 @export var grid_height = 3
 @export var move_distance = 3
+
 var tiles
 
 var player_spawn

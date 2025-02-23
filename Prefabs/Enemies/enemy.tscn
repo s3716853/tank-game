@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://bstiq4wdcauyl"]
+
+[ext_resource type="Script" path="res://Scripts/EnemyMain.gd" id="1_pl18q"]
+[ext_resource type="Texture2D" uid="uid://pu5p8uc6tfi2" path="res://Sprites/Enemy Tanks/body1.png" id="2_qn00s"]
+[ext_resource type="Texture2D" uid="uid://dqegvqs4tbkjl" path="res://Sprites/Enemy Tanks/turret1.png" id="3_gstfl"]
+[ext_resource type="Script" path="res://Scripts/health.gd" id="4_ddiuf"]
+[ext_resource type="Texture2D" uid="uid://doqgsbyrna1ce" path="res://Sprites/heart.png" id="5_yu1nd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s01wh"]
+size = Vector2(61, 54)
+
+[node name="Enemy" type="Node2D" node_paths=PackedStringArray("bullet_spawn", "turret")]
+position = Vector2(-137, 76)
+script = ExtResource("1_pl18q")
+bullet_spawn = NodePath("Body/Turret/BulletSpawn")
+turret = NodePath("Body/Turret")
+
+[node name="Body" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_qn00s")
+
+[node name="Turret" type="Sprite2D" parent="Body"]
+texture_filter = 1
+rotation = -6.36108
+texture = ExtResource("3_gstfl")
+
+[node name="BulletSpawn" type="Node2D" parent="Body/Turret"]
+position = Vector2(31.3847, 0.0271924)
+
+[node name="Area2D" type="Area2D" parent="." groups=["Enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_s01wh")
+
+[node name="Health" type="Node2D" parent="."]
+script = ExtResource("4_ddiuf")
+
+[node name="Heart 1" type="Sprite2D" parent="Health"]
+texture_filter = 1
+position = Vector2(-10, -30)
+texture = ExtResource("5_yu1nd")
+
+[node name="Heart 2" type="Sprite2D" parent="Health"]
+texture_filter = 1
+position = Vector2(0, -30)
+texture = ExtResource("5_yu1nd")
+
+[node name="Heart 3" type="Sprite2D" parent="Health"]
+texture_filter = 1
+position = Vector2(10, -30)
+texture = ExtResource("5_yu1nd")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://c46p7e1fdftbq"]
+[gd_scene load_steps=5 format=4 uid="uid://d0wtjufylq4vq"]
 
 [ext_resource type="Texture2D" uid="uid://deagx465jeuy4" path="res://Sprites/tank_map.png" id="1_gkans"]
 [ext_resource type="Script" path="res://Scripts/map.gd" id="2_4wfu2"]

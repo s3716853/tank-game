@@ -1,11 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwlt5jiinjx0v"]
+[gd_scene load_steps=7 format=3 uid="uid://dwlt5jiinjx0v"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_nlw84"]
 [ext_resource type="Script" path="res://Scripts/EnemyHandler.gd" id="3_87fwr"]
+[ext_resource type="Texture2D" uid="uid://lc3e0nluesy3" path="res://Sprites/UI/Restart.png" id="3_ee3pl"]
+[ext_resource type="Texture2D" uid="uid://tar0ulacjkmh" path="res://Sprites/UI/Restart_pressed.png" id="4_5y4px"]
+[ext_resource type="Texture2D" uid="uid://b5xsa8oiuc47" path="res://Sprites/arrow.png" id="5_fpu2f"]
+[ext_resource type="Texture2D" uid="uid://boorbsw0xbkkc" path="res://Sprites/arrow_pressed.png" id="6_kdnnc"]
 
-[node name="MAIN" type="Node2D" node_paths=PackedStringArray("EnemyHandler")]
+[node name="MAIN" type="Node2D" node_paths=PackedStringArray("EnemyHandler", "ResetButton", "NextLevelButton")]
+texture_filter = 1
 script = ExtResource("1_nlw84")
 EnemyHandler = NodePath("Enemy Handler")
+ResetButton = NodePath("UI/RestartButton")
+NextLevelButton = NodePath("UI/NextLeveLButton")
 
 [node name="Enemy Handler" type="Node2D" parent="."]
 script = ExtResource("3_87fwr")
@@ -13,3 +20,66 @@ script = ExtResource("3_87fwr")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(306, 259)
 zoom = Vector2(1.1, 1.1)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="RestartButton" type="TextureButton" parent="UI"]
+visible = false
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.0
+offset_top = -134.0
+offset_right = -60.0
+offset_bottom = -102.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(6.94, 6.94)
+texture_normal = ExtResource("3_ee3pl")
+texture_pressed = ExtResource("4_5y4px")
+texture_hover = ExtResource("4_5y4px")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/RestartButton"]
+offset_left = -34.0
+offset_top = -35.0
+offset_right = 740.0
+offset_bottom = 174.0
+scale = Vector2(0.17, 0.17)
+theme_override_font_sizes/normal_font_size = 150
+text = "You Lose"
+
+[node name="NextLeveLButton" type="TextureButton" parent="UI"]
+visible = false
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 82.0
+offset_top = -90.0
+offset_right = 100.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.57079
+scale = Vector2(6.94, 6.94)
+texture_normal = ExtResource("5_fpu2f")
+texture_pressed = ExtResource("6_kdnnc")
+texture_hover = ExtResource("6_kdnnc")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/NextLeveLButton"]
+offset_left = -37.8964
+offset_top = 61.3832
+offset_right = 736.104
+offset_bottom = 275.383
+rotation = -1.57079
+scale = Vector2(0.17, 0.17)
+theme_override_font_sizes/normal_font_size = 150
+text = "You Win"
+
+[connection signal="pressed" from="UI/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="UI/NextLeveLButton" to="." method="_on_next_leve_l_button_pressed"]

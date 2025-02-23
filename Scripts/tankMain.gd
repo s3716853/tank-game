@@ -127,7 +127,7 @@ func player_turn():
 	UI_change(true,true,false)
 	
 func tank_destroyed():
-	get_parent().reset_game()
+	get_parent().game_over()
 	queue_free()
 	
 #Turn UI on/off

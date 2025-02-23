@@ -9,7 +9,7 @@ var map : TileMapLayer
 var player_coord : Vector2
 
 #How many actions should the enemy get each turn
-var max_actions = 2
+@export var max_actions = 2
 #Current actions remaining for the enemy
 var actions_remaining
 #Location where the enemy should move to
