@@ -6,17 +6,18 @@ extends Node
 
 var level_over
 var player_turn
+var map_number = 1
 
-var map_folder = "res://Scenes/Maps/"
+var map_folder = "res://Scenes/Maps/map"
 var player_prefab = preload("res://Prefabs/player.tscn")
 #Called when the player has no actions remaining
 #Tells the Enemy Handler node that its the enemies' turn
 func _ready():
-	start_level("map")
+	start_level(map_number)
 	
 func _process(delta: float) -> void:
 	if level_over == true:
-		start_level("map2")
+		start_level(map_number)
 
 func set_enemy_turn():
 	await get_tree().create_timer(1).timeout
@@ -40,12 +41,13 @@ func enemy_location(old_position, new_position):
 func end_level():
 	Map.queue_free()
 	Player.queue_free()
+	map_number += 1
 	level_over = true
 	
-func start_level(map_number: String):
+func start_level(map_number: int):
 	player_turn = true
 	level_over = false
-	var new_map = load(map_folder + map_number + ".tscn")
+	var new_map = load(map_folder + str(map_number) + ".tscn")
 	Map = new_map.instantiate()
 	add_child(Map)
 	Player = player_prefab.instantiate()

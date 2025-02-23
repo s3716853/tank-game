@@ -179,6 +179,7 @@ func tile_heuristics(player_position):
 	
 	var can_move_on = false
 	while !can_move_on:
+		print("I'm in can move on while loop")
 		empty_values = []
 		var cardinal_cells = []
 		for neighbour in neighbours:
