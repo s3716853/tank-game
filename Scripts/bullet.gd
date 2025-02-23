@@ -32,3 +32,13 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			h.global_rotation = self.global_rotation
 			#Delete the bullet
 			queue_free()
+			
+
+#called when hitting tilemap wall
+func _on_area_2d_body_entered(body):
+	var h = hit.instantiate()
+	get_parent().add_child(h)
+	h.global_position = self.global_position
+	h.global_rotation = self.global_rotation
+	#Delete the bullet
+	queue_free()
