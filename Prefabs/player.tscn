@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://doxpjwtdt4abe"]
+[gd_scene load_steps=17 format=3 uid="uid://doxpjwtdt4abe"]
 
 [ext_resource type="Script" path="res://Scripts/tankMain.gd" id="1_tj6g3"]
 [ext_resource type="Texture2D" uid="uid://wi538ngwk4ut" path="res://Sprites/Player Tank/body.png" id="2_yx6lo"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://bhfridnif64i" path="res://Sprites/UI/Buttons/shoot.png" id="10_vsa0q"]
 [ext_resource type="Texture2D" uid="uid://crndsd3b8q5l3" path="res://Sprites/UI/Buttons/shoot_pressed.png" id="11_2umkk"]
 [ext_resource type="Texture2D" uid="uid://bi3vphr41ut8b" path="res://Sprites/UI/Buttons/cancel.png" id="12_7oh0d"]
+[ext_resource type="Texture2D" uid="uid://d25y4hq1ms6mh" path="res://Sprites/UI/Buttons/skip.png" id="12_aaj2x"]
+[ext_resource type="Texture2D" uid="uid://42vy7bpf2fei" path="res://Sprites/UI/Buttons/skip_pressed.png" id="13_3ogub"]
 [ext_resource type="Texture2D" uid="uid://dtpfnwk7tq0ls" path="res://Sprites/UI/Buttons/cancel_pressed.png" id="13_4dopn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s01wh"]
@@ -157,6 +159,7 @@ offset_bottom = 34.0
 scale = Vector2(4, 4)
 texture_normal = ExtResource("8_03cbf")
 texture_pressed = ExtResource("9_ey5b8")
+texture_hover = ExtResource("9_ey5b8")
 stretch_mode = 0
 
 [node name="Shoot Button" type="TextureButton" parent="CanvasLayer/Action Buttons"]
@@ -169,7 +172,21 @@ offset_bottom = 84.0
 scale = Vector2(4, 4)
 texture_normal = ExtResource("10_vsa0q")
 texture_pressed = ExtResource("9_ey5b8")
+texture_hover = ExtResource("11_2umkk")
 texture_focused = ExtResource("11_2umkk")
+stretch_mode = 0
+
+[node name="End Turn" type="TextureButton" parent="CanvasLayer/Action Buttons"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 670.0
+offset_top = 122.0
+offset_right = 697.0
+offset_bottom = 133.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("12_aaj2x")
+texture_pressed = ExtResource("13_3ogub")
+texture_hover = ExtResource("13_3ogub")
 stretch_mode = 0
 
 [node name="Cancel Button" type="Control" parent="CanvasLayer"]
@@ -190,6 +207,7 @@ offset_bottom = 133.0
 scale = Vector2(4, 4)
 texture_normal = ExtResource("12_7oh0d")
 texture_pressed = ExtResource("13_4dopn")
+texture_hover = ExtResource("13_4dopn")
 stretch_mode = 0
 
 [connection signal="pressed" from="Arrows/UP" to="Arrows" method="_on_up_pressed"]
@@ -198,4 +216,5 @@ stretch_mode = 0
 [connection signal="pressed" from="Arrows/LEFT" to="Arrows" method="_on_left_pressed"]
 [connection signal="pressed" from="CanvasLayer/Action Buttons/Move Button" to="." method="_on_move_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Action Buttons/Shoot Button" to="." method="_on_shoot_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Action Buttons/End Turn" to="." method="_on_end_turn_pressed"]
 [connection signal="pressed" from="CanvasLayer/Cancel Button/Cancel Button" to="." method="_on_cancel_button_pressed"]

@@ -59,6 +59,7 @@ func start_level(map_number: int):
 	Player = player_prefab.instantiate()
 	add_child(Player)
 	Player.position = Map.player_spawn.position
+	Player.target_location = Player.global_position
 	Player.map = Map
 	Map.player = Player
 	move_child(Map, 0)
