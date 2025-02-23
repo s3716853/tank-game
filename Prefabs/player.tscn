@@ -142,6 +142,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Move Button" type="Button" parent="CanvasLayer/Action Buttons"]
+layout_mode = 0
 offset_left = 693.0
 offset_top = 23.0
 offset_right = 748.0
@@ -149,6 +150,7 @@ offset_bottom = 54.0
 text = "MOVE"
 
 [node name="Shoot Button" type="Button" parent="CanvasLayer/Action Buttons"]
+layout_mode = 0
 offset_left = 693.0
 offset_top = 72.0
 offset_right = 757.0
@@ -164,6 +166,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Cancel Button" type="Button" parent="CanvasLayer/Cancel Button"]
+layout_mode = 0
 offset_left = 693.0
 offset_top = 23.0
 offset_right = 748.0
