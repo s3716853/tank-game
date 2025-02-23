@@ -16,9 +16,9 @@ func _ready():
 	start_level(map_number)
 	
 func _process(delta: float) -> void:
-	if level_over == true:
+	if level_over:
 		start_level(map_number)
-
+		
 func set_enemy_turn():
 	await get_tree().create_timer(1).timeout
 	if !player_turn:
@@ -42,6 +42,12 @@ func end_level():
 	Map.queue_free()
 	Player.queue_free()
 	map_number += 1
+	level_over = true
+
+func reset_game():
+	EnemyHandler.game_over()
+	Map.queue_free()
+	map_number = 1
 	level_over = true
 	
 func start_level(map_number: int):

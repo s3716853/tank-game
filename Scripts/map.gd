@@ -179,7 +179,7 @@ func tile_heuristics(player_position):
 	
 	var can_move_on = false
 	while !can_move_on:
-		print("I'm in can move on while loop")
+		#print("I'm in can move on while loop")
 		empty_values = []
 		var cardinal_cells = []
 		for neighbour in neighbours:
@@ -215,6 +215,7 @@ func tile_heuristics(player_position):
 					child.heuristic = 100
 			if !child.heuristic:
 				can_move_on = false
+		print(is_empty)
 
 #	test output
 	for child in get_children():

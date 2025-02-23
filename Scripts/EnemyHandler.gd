@@ -36,6 +36,8 @@ func enemy_locations(current_location, new_location):
 		get_parent().enemy_location(current_location, new_location)
 		
 func spawn_enemies(spawn_locations: Array):
+	enemies_finished = 0
+	enemy_amount = 0
 	for location in spawn_locations:
 		enemy_amount += 1
 		var enemy = enemy_prefab.instantiate()
@@ -44,3 +46,7 @@ func spawn_enemies(spawn_locations: Array):
 		
 func tank_destroyed():
 	enemy_amount -= 1
+
+func game_over():
+	for child in get_children():
+		child.queue_free()
