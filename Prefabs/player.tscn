@@ -172,6 +172,7 @@ texture_pressed = ExtResource("9_ey5b8")
 texture_focused = ExtResource("11_2umkk")
 stretch_mode = 0
 
+
 [node name="Cancel Button" type="Control" parent="CanvasLayer"]
 visible = false
 layout_mode = 3
@@ -191,6 +192,7 @@ scale = Vector2(4, 4)
 texture_normal = ExtResource("12_7oh0d")
 texture_pressed = ExtResource("13_4dopn")
 stretch_mode = 0
+
 
 [connection signal="pressed" from="Arrows/UP" to="Arrows" method="_on_up_pressed"]
 [connection signal="pressed" from="Arrows/RIGHT" to="Arrows" method="_on_right_pressed"]
