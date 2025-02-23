@@ -128,8 +128,8 @@ func tile_heuristics(player_position):
 	for child in get_children():
 		child.heuristic = null
 	var player_grid_pos = local_to_map(player_position)
-#	players pos = 0
-	grid[player_grid_pos.x][player_grid_pos.y].heuristic = 0
+#	players pos heuristic = 1
+	grid[player_grid_pos.x][player_grid_pos.y].heuristic = 1
 	var straight_shot = []
 	var x = player_grid_pos.x
 	#Check all cells to the left of player
@@ -171,8 +171,8 @@ func tile_heuristics(player_position):
 	for tile in straight_shot:
 		tile.heuristic = 1
 	
-#	set player's pos heuristic = 0
-	grid[player_grid_pos.x][player_grid_pos.y].heuristic = 0
+#	set player's pos heuristic = 1
+#	grid[player_grid_pos.x][player_grid_pos.y].heuristic = 1
 	
 	var neighbours = straight_shot
 	var empty_values = []

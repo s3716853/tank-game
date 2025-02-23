@@ -23,8 +23,6 @@ var body_rotated = true
 
 func _ready():
 	actions_remaining = max_actions
-	#Sets starting position cells to be not empty
-	get_parent().enemy_locations(null,self.position)
 
 #Choose an action to do
 func action_choice():
