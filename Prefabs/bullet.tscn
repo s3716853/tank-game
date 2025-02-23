@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7nj7o41aymdr"]
+[gd_scene load_steps=4 format=3 uid="uid://cneqec62v6sgs"]
 
 [ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_xflg5"]
 [ext_resource type="Texture2D" uid="uid://bowaip2j6t7ob" path="res://Sprites/bullet.png" id="2_42jsm"]
@@ -20,3 +20,4 @@ position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_saknj")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
