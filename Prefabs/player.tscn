@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://doxpjwtdt4abe"]
+[gd_scene load_steps=15 format=3 uid="uid://doxpjwtdt4abe"]
 
 [ext_resource type="Script" path="res://Scripts/tankMain.gd" id="1_tj6g3"]
 [ext_resource type="Texture2D" uid="uid://wi538ngwk4ut" path="res://Sprites/Player Tank/body.png" id="2_yx6lo"]
@@ -7,6 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://doqgsbyrna1ce" path="res://Sprites/heart.png" id="5_4v6pv"]
 [ext_resource type="Texture2D" uid="uid://b5xsa8oiuc47" path="res://Sprites/arrow.png" id="6_ol1cb"]
 [ext_resource type="Script" path="res://Scripts/player_shooting.gd" id="6_rh87x"]
+[ext_resource type="Texture2D" uid="uid://dk2a1xj0i11ck" path="res://Sprites/UI/Buttons/move.png" id="8_03cbf"]
+[ext_resource type="Texture2D" uid="uid://dlx7g7gqsirv6" path="res://Sprites/UI/Buttons/move_pressed.png" id="9_ey5b8"]
+[ext_resource type="Texture2D" uid="uid://bhfridnif64i" path="res://Sprites/UI/Buttons/shoot.png" id="10_vsa0q"]
+[ext_resource type="Texture2D" uid="uid://crndsd3b8q5l3" path="res://Sprites/UI/Buttons/shoot_pressed.png" id="11_2umkk"]
+[ext_resource type="Texture2D" uid="uid://bi3vphr41ut8b" path="res://Sprites/UI/Buttons/cancel.png" id="12_7oh0d"]
+[ext_resource type="Texture2D" uid="uid://dtpfnwk7tq0ls" path="res://Sprites/UI/Buttons/cancel_pressed.png" id="13_4dopn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s01wh"]
 size = Vector2(61, 54)
@@ -141,20 +147,30 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Move Button" type="Button" parent="CanvasLayer/Action Buttons"]
-offset_left = 693.0
+[node name="Move Button" type="TextureButton" parent="CanvasLayer/Action Buttons"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 672.0
 offset_top = 23.0
-offset_right = 748.0
-offset_bottom = 54.0
-text = "MOVE"
+offset_right = 698.0
+offset_bottom = 34.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("8_03cbf")
+texture_pressed = ExtResource("9_ey5b8")
+stretch_mode = 0
 
-[node name="Shoot Button" type="Button" parent="CanvasLayer/Action Buttons"]
-offset_left = 693.0
-offset_top = 72.0
-offset_right = 757.0
-offset_bottom = 103.0
-text = "SHOOT
-"
+[node name="Shoot Button" type="TextureButton" parent="CanvasLayer/Action Buttons"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 670.0
+offset_top = 73.0
+offset_right = 697.0
+offset_bottom = 84.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("10_vsa0q")
+texture_pressed = ExtResource("9_ey5b8")
+texture_focused = ExtResource("11_2umkk")
+stretch_mode = 0
 
 [node name="Cancel Button" type="Control" parent="CanvasLayer"]
 visible = false
@@ -163,12 +179,17 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Cancel Button" type="Button" parent="CanvasLayer/Cancel Button"]
-offset_left = 693.0
-offset_top = 23.0
-offset_right = 748.0
-offset_bottom = 54.0
-text = "CANCEL"
+[node name="Cancel Button" type="TextureButton" parent="CanvasLayer/Cancel Button"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 665.0
+offset_top = 122.0
+offset_right = 695.0
+offset_bottom = 133.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("12_7oh0d")
+texture_pressed = ExtResource("13_4dopn")
+stretch_mode = 0
 
 [connection signal="pressed" from="Arrows/UP" to="Arrows" method="_on_up_pressed"]
 [connection signal="pressed" from="Arrows/RIGHT" to="Arrows" method="_on_right_pressed"]
