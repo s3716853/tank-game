@@ -76,6 +76,7 @@ func shoot():
 	add_child(b)
 	b.global_position = bullet_spawn.global_position
 	b.global_rotation = turret.global_rotation
+	await get_tree().create_timer(1).timeout 
 	action_taken()
 #Rotate turret smootly
 func rotate_turret(d):

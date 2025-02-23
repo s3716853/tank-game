@@ -87,6 +87,8 @@ func move(location):
 	target_location = location
 	t = 0
 	body_rotated = false
+	#Turn the cancel button off so you can't cancel mid move
+	UI_change(true,false,false)
 #Shoot button sends signal here
 func _on_shoot_button_pressed() -> void:
 	arrows.visible = true
@@ -113,6 +115,8 @@ func action_taken():
 		UI_change(true, true, false)	
 #Rotate turret smootly
 func rotate_turret(d):
+	#Turn the cancel button off so you can't cancel mid move
+	UI_change(true,false,false)
 	t2 = 0
 	direction = d
 	turret_rotated = false
