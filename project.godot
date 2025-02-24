@@ -24,5 +24,5 @@ Wall=""
 [rendering]
 
 renderer/rendering_method="mobile"
-environment/defaults/default_clear_color=Color(0.843872, 0.619608, 0.390852, 1)
+environment/defaults/default_clear_color=Color(0.670964, 0.533135, 0.296058, 1)
 environment/transparent_background=false

@@ -18,7 +18,6 @@ func enemy_finished():
 func enemy_turn(map, player_coord: Vector2):
 	for child : EnemyMain in get_children():
 		child.actions_remaining = child.max_actions
-		child.map = map
 		child.player_coord = player_coord
 		child.action_choice()
 
@@ -36,7 +35,7 @@ func enemy_locations(current_location, new_location):
 	for child in get_children():
 		get_parent().enemy_location(current_location, new_location)
 		
-func spawn_enemies(spawn_locations: Array, hard_spawn_locations: Array):
+func spawn_enemies(spawn_locations: Array, hard_spawn_locations: Array, mapRef: TileMapLayer):
 	enemies_finished = 0
 	enemy_amount = 0
 	for location in spawn_locations:
@@ -44,11 +43,13 @@ func spawn_enemies(spawn_locations: Array, hard_spawn_locations: Array):
 		var enemy = enemy_prefab.instantiate()
 		add_child(enemy)
 		enemy.position = location.position
+		enemy.map = mapRef
 	for location in hard_spawn_locations:
 		enemy_amount += 1
 		var hard_enemy = hard_enemy_prefab.instantiate()
 		add_child(hard_enemy)
 		hard_enemy.position = location.position
+		hard_enemy.map = mapRef
 		
 func tank_destroyed():
 	enemy_amount -= 1
