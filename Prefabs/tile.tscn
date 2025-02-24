@@ -1,10 +1,62 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1up5go4ajb16"]
+[gd_scene load_steps=8 format=3 uid="uid://c1up5go4ajb16"]
 
 [ext_resource type="Script" path="res://Scripts/tile.gd" id="1_26ja5"]
 [ext_resource type="Texture2D" uid="uid://d04s12y8i0x3f" path="res://Sprites/greentile.png" id="2_tp4fq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r05ly"]
 size = Vector2(62, 62)
+
+[sub_resource type="Animation" id="Animation_enidl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_47aee"]
+resource_name = "tile_pop_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.233333, 0.366667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.2, 1.2), Vector2(0.95, 0.95), Vector2(1.06, 1.06), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_y4ni4"]
+resource_name = "tile_pop_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0401136, 0.10697, 0.218526),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.95, 0.95), Vector2(1.2, 1.2), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hhvh2"]
+_data = {
+"RESET": SubResource("Animation_enidl"),
+"tile_pop_in": SubResource("Animation_47aee"),
+"tile_pop_out": SubResource("Animation_y4ni4")
+}
 
 [node name="TileNode" type="Node2D"]
 visible = false
@@ -28,6 +80,11 @@ offset_right = 22.0
 offset_bottom = 32.0
 theme_override_font_sizes/font_size = 50
 text = "1"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hhvh2")
+}
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

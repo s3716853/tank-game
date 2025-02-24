@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bstiq4wdcauyl"]
+[gd_scene load_steps=9 format=3 uid="uid://bstiq4wdcauyl"]
 
 [ext_resource type="Script" path="res://Scripts/EnemyMain.gd" id="1_pl18q"]
 [ext_resource type="Texture2D" uid="uid://pu5p8uc6tfi2" path="res://Sprites/Enemy Tanks/body1.png" id="2_qn00s"]
@@ -8,6 +8,27 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s01wh"]
 size = Vector2(61, 54)
+
+[sub_resource type="Animation" id="Animation_rwv0i"]
+resource_name = "turret_recoil_enemy"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Turret:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02184, 0.0729051),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-3, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ho6kb"]
+_data = {
+"turret_recoil_enemy": SubResource("Animation_rwv0i")
+}
 
 [node name="Enemy" type="Node2D" node_paths=PackedStringArray("bullet_spawn", "turret")]
 position = Vector2(-137, 76)
@@ -25,7 +46,7 @@ rotation = -6.36108
 texture = ExtResource("3_gstfl")
 
 [node name="BulletSpawn" type="Node2D" parent="Body/Turret"]
-position = Vector2(31.3847, 0.0271924)
+position = Vector2(26.0768, 0.0292811)
 
 [node name="Area2D" type="Area2D" parent="." groups=["Enemy"]]
 
@@ -50,3 +71,8 @@ texture = ExtResource("5_yu1nd")
 texture_filter = 1
 position = Vector2(10, -30)
 texture = ExtResource("5_yu1nd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ho6kb")
+}

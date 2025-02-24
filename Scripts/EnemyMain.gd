@@ -2,7 +2,12 @@ extends Node
 class_name EnemyMain
 
 var bullet = preload("res://Prefabs/bullet.tscn")
+#Shoot Effect
+var shoot_effect = preload("res://Prefabs/Effects/shoot_effect.tscn")
 @export var bullet_spawn = Node2D
+#Explosion
+var explosion = preload("res://Prefabs/Effects/explosion.tscn")
+
 #Turret child, used to set the direction of the turret for shooting
 @export var turret : Node2D
 var map : TileMapLayer
@@ -69,11 +74,18 @@ func move(location : Vector2):
 	body_rotated = false
 #Called when an enemy shoots
 func shoot():
+	#Turret recoil animation
+	get_node("AnimationPlayer").play("turret_recoil_enemy")
 	#Spawning bullet and setting it to shoot from the "BulletSpawn" position
 	var b = bullet.instantiate()
 	add_child(b)
 	b.global_position = bullet_spawn.global_position
 	b.global_rotation = turret.global_rotation
+	#Spawning shoot effect
+	var s = shoot_effect.instantiate()
+	add_child(s)
+	s.global_position = bullet_spawn.global_position
+	s.global_rotation = turret.global_rotation
 	await get_tree().create_timer(1).timeout 
 	action_taken()
 #Rotate turret smootly
@@ -128,6 +140,11 @@ func _process(delta: float) -> void:
 			body_rotated = true		
 #Called when the tank is destroyed
 func tank_destroyed():
+	#Spawn explosion
+	var e = explosion.instantiate()
+	get_tree().root.get_child(0).add_child(e)
+	e.global_position = self.global_position
+	
 	get_parent().tank_destroyed()
 	var pos = map.local_to_map(self.position)
 	map.grid[pos.x][pos.y].cell_empty = true
