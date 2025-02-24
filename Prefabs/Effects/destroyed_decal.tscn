@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bg0lmsvnju5pm" path="res://Sprites/destroyed.png" id="1_5a1ta"]
 
 [node name="destroyed_decal" type="Node2D"]
+z_index = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.541176)

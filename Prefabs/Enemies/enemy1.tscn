@@ -31,6 +31,7 @@ _data = {
 }
 
 [node name="Enemy" type="Node2D" node_paths=PackedStringArray("bullet_spawn", "turret")]
+z_index = 2
 position = Vector2(-137, 76)
 script = ExtResource("1_pl18q")
 bullet_spawn = NodePath("Body/Turret/BulletSpawn")
