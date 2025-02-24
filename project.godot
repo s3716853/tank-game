@@ -19,9 +19,10 @@ config/icon="res://icon.svg"
 
 Enemy="EnemyTanks"
 Player=""
+Wall=""
 
 [rendering]
 
 renderer/rendering_method="mobile"
-environment/defaults/default_clear_color=Color(0.85098, 0.627451, 0.4, 1)
+environment/defaults/default_clear_color=Color(0.843872, 0.619608, 0.390852, 1)
 environment/transparent_background=false

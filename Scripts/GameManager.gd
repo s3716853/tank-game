@@ -5,6 +5,7 @@ extends Node
 @export var Map : TileMapLayer
 @export var ResetButton : TextureButton
 @export var NextLevelButton : TextureButton
+@export var Cam : Camera2D
 
 var level_over
 var player_turn
@@ -83,3 +84,5 @@ func start_level():
 	Map.player = Player
 	move_child(Map, 0)
 	EnemyHandler.spawn_enemies(Map.enemy_spawn, Map.hard_enemy_spawn)
+	#Sends map to camera so the camera can re-center itself
+	Cam.recenter(Map)
