@@ -4,7 +4,7 @@ var enemies_finished = 0
 
 var enemy_amount = 0
 
-var enemy_prefab = preload("res://Prefabs/Enemies/enemy.tscn")
+var enemy_prefab = preload("res://Prefabs/Enemies/enemy1.tscn")
 
 #Check if all enemies have finished their turn, if they have change to the player's turn
 func enemy_finished():

@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://cfhqjrylaggkk"]
 
 [ext_resource type="Script" path="res://Scripts/EnemyMain.gd" id="1_dhgmf"]
-[ext_resource type="Texture2D" uid="uid://pu5p8uc6tfi2" path="res://Sprites/Enemy Tanks/body1.png" id="2_y2ld3"]
-[ext_resource type="Texture2D" uid="uid://dqegvqs4tbkjl" path="res://Sprites/Enemy Tanks/turret1.png" id="3_d3clo"]
+[ext_resource type="Texture2D" uid="uid://qrrqwdu5e0f3" path="res://Sprites/Enemy Tanks/body2.png" id="2_ranmk"]
+[ext_resource type="Texture2D" uid="uid://ricg55u4toac" path="res://Sprites/Enemy Tanks/turret2.png" id="3_wynbq"]
 [ext_resource type="Script" path="res://Scripts/health.gd" id="4_xvg0u"]
 [ext_resource type="Texture2D" uid="uid://doqgsbyrna1ce" path="res://Sprites/heart.png" id="5_od1lq"]
 
@@ -14,15 +14,16 @@ position = Vector2(-137, 76)
 script = ExtResource("1_dhgmf")
 bullet_spawn = NodePath("Body/Turret/BulletSpawn")
 turret = NodePath("Body/Turret")
+max_actions = 4
 
 [node name="Body" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_y2ld3")
+texture = ExtResource("2_ranmk")
 
 [node name="Turret" type="Sprite2D" parent="Body"]
 texture_filter = 1
 rotation = -6.36108
-texture = ExtResource("3_d3clo")
+texture = ExtResource("3_wynbq")
 
 [node name="BulletSpawn" type="Node2D" parent="Body/Turret"]
 position = Vector2(31.3847, 0.0271924)
@@ -35,15 +36,11 @@ shape = SubResource("RectangleShape2D_s01wh")
 
 [node name="Health" type="Node2D" parent="."]
 script = ExtResource("4_xvg0u")
+health = 2
 
 [node name="Heart 1" type="Sprite2D" parent="Health"]
 texture_filter = 1
 position = Vector2(-10, -30)
-texture = ExtResource("5_od1lq")
-
-[node name="Heart 2" type="Sprite2D" parent="Health"]
-texture_filter = 1
-position = Vector2(0, -30)
 texture = ExtResource("5_od1lq")
 
 [node name="Heart 3" type="Sprite2D" parent="Health"]
