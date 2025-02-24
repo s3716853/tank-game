@@ -8,7 +8,11 @@ extends Node
 @export var cancel_button : Control
 
 var bullet = preload("res://Prefabs/bullet.tscn")
+#Shoot Effect
+var shoot_effect = preload("res://Prefabs/Effects/shoot_effect.tscn")
 @export var bullet_spawn = Node2D
+
+
 #Node handling the tiles which can be moved to
 var map = Node2D
 #Child node containing the arrow buttons to choose which direction to shoot
@@ -101,6 +105,14 @@ func shoot():
 	add_child(b)
 	b.global_position = bullet_spawn.global_position
 	b.global_rotation = turret.global_rotation
+	#Spawning shoot effect
+	var s = shoot_effect.instantiate()
+	add_child(s)
+	s.global_position = bullet_spawn.global_position
+	s.global_rotation = turret.global_rotation
+	
+	#Turret recoil animation
+	get_node("AnimationPlayer").play("turret_recoil")
 	action_taken()
 	
 #Called once an action is taken

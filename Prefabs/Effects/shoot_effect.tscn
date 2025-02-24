@@ -1,0 +1,87 @@
+[gd_scene load_steps=13 format=3 uid="uid://dxrqmgo34rfyx"]
+
+[ext_resource type="Texture2D" uid="uid://bs86t83v7yl0m" path="res://Sprites/shoot_effect.png" id="1_vnugt"]
+[ext_resource type="Script" path="res://Scripts/destroy_after_time.gd" id="1_vplu0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4n6xa"]
+atlas = ExtResource("1_vnugt")
+region = Rect2(0, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_patcf"]
+atlas = ExtResource("1_vnugt")
+region = Rect2(128, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ry0os"]
+atlas = ExtResource("1_vnugt")
+region = Rect2(256, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qii56"]
+atlas = ExtResource("1_vnugt")
+region = Rect2(384, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tolb1"]
+atlas = ExtResource("1_vnugt")
+region = Rect2(512, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6x6w"]
+atlas = ExtResource("1_vnugt")
+region = Rect2(640, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohxja"]
+atlas = ExtResource("1_vnugt")
+region = Rect2(768, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fa2tk"]
+atlas = ExtResource("1_vnugt")
+region = Rect2(896, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uo6ce"]
+atlas = ExtResource("1_vnugt")
+region = Rect2(1024, 0, 128, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yiy3t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4n6xa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_patcf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ry0os")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qii56")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tolb1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6x6w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohxja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fa2tk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uo6ce")
+}],
+"loop": false,
+"name": &"default",
+"speed": 48.0
+}]
+
+[node name="shoot_effect" type="Node2D"]
+script = ExtResource("1_vplu0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(11, 0)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_yiy3t")
+autoplay = "default"
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

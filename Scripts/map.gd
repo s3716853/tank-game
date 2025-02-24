@@ -120,6 +120,7 @@ func find_moveable_tiles(player_position):
 	for tile in moveable:
 		if(tile.cell_empty and tile.global_position != player.global_position):
 			tile.visible = true
+			tile.get_node("AnimationPlayer").play("tile_pop_in")
 		
 		
 	
@@ -224,8 +225,6 @@ func tile_heuristics(player_position):
 					child.heuristic = 100
 			if !child.heuristic:
 				can_move_on = false
-		print(is_empty)
-
 #	test output
 	for child in get_children():
 		child.find_child("Label").text = str(child.heuristic)
@@ -238,6 +237,10 @@ func set_cell_empty(old_position, location):
 #Turn moveable tiles on/off
 func moveable_visibility(visibility):
 	#For all the currently visible tile nodes, turn them off
+	for tile in moveable:
+		tile.get_node("AnimationPlayer").play("tile_pop_out")
+	
+	await get_tree().create_timer(0.5).timeout 
 	for tile in moveable:
 		tile.visible = visibility
 	
