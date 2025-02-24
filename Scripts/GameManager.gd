@@ -11,17 +11,30 @@ extends Node
 var level_over
 var player_turn
 var map_number = 1
+var number_of_maps = 0
 
 var map_folder = "res://Scenes/Maps/map"
 var player_prefab = preload("res://Prefabs/player.tscn")
 #Called when the player has no actions remaining
 #Tells the Enemy Handler node that its the enemies' turn
 func _ready():
+	find_map_number("res://Scenes/Maps/")
 	start_level()
 	
 func _process(_delta: float) -> void:
 	if level_over:
 		start_level()
+		
+func find_map_number(path):
+	var dir = DirAccess.open(path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			number_of_maps += 1
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access the path.")
 		
 func set_enemy_turn():
 	await get_tree().create_timer(0.1).timeout
