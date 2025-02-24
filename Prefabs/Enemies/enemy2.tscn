@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfhqjrylaggkk"]
+[gd_scene load_steps=9 format=3 uid="uid://dbfe5jd6kxk0p"]
 
 [ext_resource type="Script" path="res://Scripts/EnemyMain.gd" id="1_dhgmf"]
 [ext_resource type="Texture2D" uid="uid://qrrqwdu5e0f3" path="res://Sprites/Enemy Tanks/body2.png" id="2_ranmk"]
@@ -8,6 +8,26 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s01wh"]
 size = Vector2(61, 54)
+
+[sub_resource type="Animation" id="Animation_rwv0i"]
+resource_name = "turret_recoil_enemy"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body/Turret:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02184, 0.0729051),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-3, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ho6kb"]
+_data = {
+"turret_recoil_enemy": SubResource("Animation_rwv0i")
+}
 
 [node name="Enemy" type="Node2D" node_paths=PackedStringArray("bullet_spawn", "turret")]
 position = Vector2(-137, 76)
@@ -26,7 +46,7 @@ rotation = -6.36108
 texture = ExtResource("3_wynbq")
 
 [node name="BulletSpawn" type="Node2D" parent="Body/Turret"]
-position = Vector2(31.3847, 0.0271924)
+position = Vector2(26.0768, 0.0292811)
 
 [node name="Area2D" type="Area2D" parent="." groups=["Enemy"]]
 
@@ -36,14 +56,18 @@ shape = SubResource("RectangleShape2D_s01wh")
 
 [node name="Health" type="Node2D" parent="."]
 script = ExtResource("4_xvg0u")
-health = 2
 
 [node name="Heart 1" type="Sprite2D" parent="Health"]
 texture_filter = 1
-position = Vector2(-10, -30)
+position = Vector2(-5, -30)
 texture = ExtResource("5_od1lq")
 
 [node name="Heart 3" type="Sprite2D" parent="Health"]
 texture_filter = 1
-position = Vector2(10, -30)
+position = Vector2(5, -30)
 texture = ExtResource("5_od1lq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ho6kb")
+}

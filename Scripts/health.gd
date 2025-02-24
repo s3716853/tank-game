@@ -1,7 +1,8 @@
 extends Node
 
 @export var health = 3
-
+#Explosion for when you die
+var explosion = preload("res://Prefabs/Effects/explosion.tscn")
 #Deal damage equal to the amount
 func damage(amount):
 	health -= amount
@@ -14,6 +15,10 @@ func damage(amount):
 		i += 1
 	#Check if they are dead
 	if(health <= 0):
+		#Spawn explosion
+		var e = explosion.instantiate()
+		get_tree().root.get_child(0).add_child(e)
+		e.global_position = self.global_position
 		get_parent().tank_destroyed()
 #Keeps the hearts rotated correctly
 func _process(_delta):
