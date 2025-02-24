@@ -101,6 +101,16 @@ texture_filter = 1
 position = Vector2(10, -30)
 texture = ExtResource("5_4v6pv")
 
+[node name="Heart 4" type="Sprite2D" parent="Health"]
+texture_filter = 1
+position = Vector2(20, -30)
+texture = ExtResource("5_4v6pv")
+
+[node name="Heart 5" type="Sprite2D" parent="Health"]
+texture_filter = 1
+position = Vector2(-20, -30)
+texture = ExtResource("5_4v6pv")
+
 [node name="Arrows" type="Node2D" parent="."]
 visible = false
 script = ExtResource("6_rh87x")

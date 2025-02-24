@@ -38,14 +38,14 @@ func find_map_number(path):
 		print("An error occurred when trying to access the path.")
 		
 func set_enemy_turn():
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.3).timeout
 	if !player_turn:
 		EnemyHandler.enemy_turn(Map, Map.local_to_map(Player.target_location))
 	else:
 		player_turn = false
 
 func set_player_turn():
-	await get_tree().create_timer(0.1).timeout 
+	await get_tree().create_timer(0.3).timeout 
 	if is_instance_valid(Player):
 		Player.player_turn()
 	else:
@@ -107,7 +107,7 @@ func start_level():
 	Player.map = Map
 	Map.player = Player
 	move_child(Map, 0)
-	EnemyHandler.spawn_enemies(Map.enemy_spawn, Map.hard_enemy_spawn)
+	EnemyHandler.spawn_enemies(Map.enemy_spawn, Map.hard_enemy_spawn, Map)
 	#Sends map to camera so the camera can re-center itself
 	Cam.recenter(Map)
 	#Delete exploision decals from previous level

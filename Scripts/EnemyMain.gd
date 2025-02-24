@@ -56,7 +56,11 @@ func action_choice():
 				move(map.map_to_local(lowest_coord))
 	#If there isn't a 1 or 0
 	if(lowest_heuristic > 1):
-		move(map.map_to_local(lowest_coord))
+		#Making sure a path exsits
+		if(lowest_coord):
+			move(map.map_to_local(lowest_coord))
+		else:
+			action_taken()
 #Hurt Tank
 #Sends signal to child which handles the tank health
 func hurt(amount):
@@ -147,8 +151,7 @@ func tank_destroyed():
 	var e = explosion.instantiate()
 	get_tree().root.get_child(0).add_child(e)
 	e.global_position = self.global_position
-	
-	get_parent().tank_destroyed()
-	var pos = map.local_to_map(self.position)
+	var pos = map.local_to_map(self.global_position)
 	map.grid[pos.x][pos.y].cell_empty = true
+	get_parent().tank_destroyed()
 	queue_free()
