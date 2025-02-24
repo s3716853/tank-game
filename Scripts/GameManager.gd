@@ -80,4 +80,4 @@ func start_level():
 	Player.map = Map
 	Map.player = Player
 	move_child(Map, 0)
-	EnemyHandler.spawn_enemies(Map.enemy_spawn)
+	EnemyHandler.spawn_enemies(Map.enemy_spawn, Map.hard_enemy_spawn)

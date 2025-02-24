@@ -9,6 +9,7 @@ var tiles
 
 var player_spawn
 var enemy_spawn = []
+var hard_enemy_spawn = []
 
 #Player tank. Used to move send signal to move player
 @export var player = Node2D
@@ -63,6 +64,12 @@ func _ready():
 		elif type == Vector2i(3, 0):
 			scene.cell_empty = false
 			enemy_spawn.append(scene)
+			set_cell(tile, 0, Vector2i(0, 0))
+			
+#		hard enemy spawn
+		elif type == Vector2i(4, 0):
+			scene.cell_empty = false
+			hard_enemy_spawn.append(scene)
 			set_cell(tile, 0, Vector2i(0, 0))
 		
 		grid[tile.x][tile.y] = scene
