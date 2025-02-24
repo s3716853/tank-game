@@ -31,13 +31,14 @@ func action_choice():
 	
 	var surrounding_coord = map.get_surrounding_cells(tank_coord)
 	
-	var lowest_heuristic = 1000
+	var lowest_heuristic = 100
 	var lowest_coord = null
 	for coord in surrounding_coord:
 		if(
 			range(map.grid_width).has(coord.x) and
 			range(map.grid_height).has(coord.y) and
-			map.grid[coord.x][coord.y].heuristic < lowest_heuristic
+			map.grid[coord.x][coord.y].heuristic < lowest_heuristic and
+			map.grid[coord.x][coord.y].cell_empty
 		):
 			lowest_heuristic = map.grid[coord.x][coord.y].heuristic
 			lowest_coord = coord
@@ -58,10 +59,12 @@ func hurt(amount):
 
 #Called when an enemy moves
 func move(location : Vector2):
-	#Update heuristic number
-	map.tile_heuristics(map.map_to_local(player_coord))
 	#Sets the old grid cell_empty to true and the new cell_empty to false
 	get_parent().enemy_locations(self.position, location)
+	
+	#Update heuristic number
+	map.tile_heuristics(map.map_to_local(player_coord))
+	
 	#MOVE to location
 	target_location = location
 	t = 0
