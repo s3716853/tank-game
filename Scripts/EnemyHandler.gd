@@ -21,7 +21,7 @@ func enemy_turn(map, player_coord: Vector2):
 		child.player_coord = player_coord
 		child.action_choice()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	#If there are no enemy tanks remaining then the player wins
 	if(enemy_amount <= 0):
 		get_parent().round_won()

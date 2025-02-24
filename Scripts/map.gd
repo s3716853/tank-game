@@ -194,7 +194,7 @@ func tile_heuristics(player_position):
 						else:
 							empty_values.append(grid[cell.x][cell.y])
 							var values = get_surrounding_cells(cell)
-							var lowest
+							var lowest = null
 							for value in values:
 								if value.x >= 0 && value.x <= grid_width - 1 && value.y >= 0 && value.y <= grid_height - 1:
 									if grid[value.x][value.y].heuristic:

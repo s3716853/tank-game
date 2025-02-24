@@ -35,7 +35,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			
 
 #called when hitting tilemap wall
-func _on_area_2d_body_entered(body):
+func _on_area_2d_body_entered(_body):
 	var h = hit.instantiate()
 	get_parent().add_child(h)
 	h.global_position = self.global_position
