@@ -57,9 +57,10 @@ func action_choice():
 	#If there isn't a 1 or 0
 	if(lowest_heuristic > 1):
 		#Making sure a path exsits
-		if(lowest_coord):
+		if(lowest_coord != null):
 			move(map.map_to_local(lowest_coord))
 		else:
+			print(lowest_coord)
 			action_taken()
 #Hurt Tank
 #Sends signal to child which handles the tank health
