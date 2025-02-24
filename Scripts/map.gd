@@ -118,9 +118,10 @@ func find_moveable_tiles(player_position):
 		y += 1
 	#Turn on moveable tiles
 	for tile in moveable:
-		if(tile.cell_empty):
+		if(tile.cell_empty and tile.global_position != player.global_position):
 			tile.visible = true
 			tile.get_node("AnimationPlayer").play("tile_pop_in")
+		
 		
 	
 #A tile has been clicked on and the tank will be moved to the tile
@@ -227,7 +228,7 @@ func tile_heuristics(player_position):
 #	test output
 	for child in get_children():
 		child.find_child("Label").text = str(child.heuristic)
-
+			
 func set_cell_empty(old_position, location):
 	if(old_position != null):
 		grid[local_to_map(old_position).x][local_to_map(old_position).y].cell_empty = true
@@ -242,3 +243,4 @@ func moveable_visibility(visibility):
 	await get_tree().create_timer(0.5).timeout 
 	for tile in moveable:
 		tile.visible = visibility
+	
