@@ -21,11 +21,6 @@ func enemy_turn(map, player_coord: Vector2):
 		child.player_coord = player_coord
 		child.action_choice()
 
-func _process(_delta: float) -> void:
-	#If there are no enemy tanks remaining then the player wins
-	if(enemy_amount <= 0):
-		get_parent().round_won()
-		
 #Sets the cell_empty = false for every enemy position
 #this is called once at the start of the game and then every enemy move
 #Current location is used to set the old cell to empty when the enemy moves
@@ -53,6 +48,8 @@ func spawn_enemies(spawn_locations: Array, hard_spawn_locations: Array, mapRef: 
 		
 func tank_destroyed():
 	enemy_amount -= 1
+	if(enemy_amount <= 0):
+		get_parent().round_won()
 
 func game_over():
 	for child in get_children():
