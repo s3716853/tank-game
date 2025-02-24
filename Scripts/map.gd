@@ -238,7 +238,9 @@ func set_cell_empty(old_position, location):
 func moveable_visibility(visibility):
 	#For all the currently visible tile nodes, turn them off
 	for tile in moveable:
-		tile.get_node("AnimationPlayer").play("tile_pop_out")
+		#Stops tile player is on, from playing pop out animation
+		if(tile.global_position != player.global_position):
+			tile.get_node("AnimationPlayer").play("tile_pop_out")
 	
 	await get_tree().create_timer(0.5).timeout 
 	for tile in moveable:

@@ -21,5 +21,5 @@ func recenter(map : TileMapLayer):
 	#8 is the default size of the first map, so we scale based on that
 	var amount = largest_side - 8
 	#0.0277 works for scaling the correct amount
-	var factor = 0.0277 * amount
+	var factor = 0.032 * amount
 	self.zoom = Vector2(1.25 - factor,1.25 - factor)
