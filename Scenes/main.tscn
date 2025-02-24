@@ -8,11 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://b5xsa8oiuc47" path="res://Sprites/arrow.png" id="5_fpu2f"]
 [ext_resource type="Texture2D" uid="uid://boorbsw0xbkkc" path="res://Sprites/arrow_pressed.png" id="6_kdnnc"]
 
-[node name="MAIN" type="Node2D" node_paths=PackedStringArray("EnemyHandler", "ResetButton", "NextLevelButton", "Cam", "Decals")]
+[node name="MAIN" type="Node2D" node_paths=PackedStringArray("EnemyHandler", "ResetButton", "WinGameButton", "NextLevelButton", "Cam", "Decals")]
 texture_filter = 1
 script = ExtResource("1_nlw84")
 EnemyHandler = NodePath("Enemy Handler")
 ResetButton = NodePath("UI/RestartButton")
+WinGameButton = NodePath("UI/WinGameButton")
 NextLevelButton = NodePath("UI/NextLeveLButton")
 Cam = NodePath("Camera2D")
 Decals = NodePath("Decals")
@@ -56,6 +57,35 @@ scale = Vector2(0.17, 0.17)
 theme_override_font_sizes/normal_font_size = 150
 text = "You Lose"
 
+[node name="WinGameButton" type="TextureButton" parent="UI"]
+visible = false
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -112.0
+offset_right = -100.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(6.94, 6.94)
+texture_normal = ExtResource("3_ee3pl")
+texture_pressed = ExtResource("4_5y4px")
+texture_hover = ExtResource("4_5y4px")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/WinGameButton"]
+layout_mode = 0
+offset_left = -44.3804
+offset_top = -33.7176
+offset_right = 729.62
+offset_bottom = 175.282
+scale = Vector2(0.17, 0.17)
+theme_override_font_sizes/normal_font_size = 150
+text = "Congrats!"
+
 [node name="NextLeveLButton" type="TextureButton" parent="UI"]
 visible = false
 texture_filter = 1
@@ -90,4 +120,6 @@ text = "You Win"
 [node name="Decals" type="Node2D" parent="."]
 
 [connection signal="pressed" from="UI/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="UI/WinGameButton" to="." method="_on_win_game_button_pressed"]
+[connection signal="pressed" from="UI/WinGameButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="UI/NextLeveLButton" to="." method="_on_next_leve_l_button_pressed"]

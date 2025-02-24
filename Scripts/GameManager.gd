@@ -4,6 +4,7 @@ extends Node
 @export var Player : Node2D
 @export var Map : TileMapLayer
 @export var ResetButton : TextureButton
+@export var WinGameButton : TextureButton
 @export var NextLevelButton : TextureButton
 @export var Cam : Camera2D
 @export var Decals : Node2D
@@ -22,7 +23,7 @@ func _ready():
 	start_level()
 	
 func _process(_delta: float) -> void:
-	if level_over:
+	if level_over and map_number <= number_of_maps:
 		start_level()
 		
 func find_map_number(path):
@@ -56,7 +57,11 @@ func enemy_location(old_position, new_position):
 
 #Turns on the next level button
 func round_won():
-	NextLevelButton.visible = true
+	map_number += 1
+	if map_number <= number_of_maps:
+		NextLevelButton.visible = true
+	elif map_number > number_of_maps:
+		WinGameButton.visible = true
 	Player.level_complete()
 
 func _on_next_leve_l_button_pressed() -> void:
@@ -65,7 +70,6 @@ func _on_next_leve_l_button_pressed() -> void:
 	
 func end_level():
 	Map.queue_free()
-	map_number += 1
 	level_over = true
 	if(Player != null):
 		Player.queue_free()
@@ -77,6 +81,12 @@ func game_over():
 func _on_restart_button_pressed() -> void:
 	ResetButton.visible = false
 	reset_game()
+	
+func _on_win_game_button_pressed():
+	Player.queue_free()
+	WinGameButton.visible = false
+	reset_game()
+
 #Resets the game
 func reset_game():
 	EnemyHandler.game_over()
