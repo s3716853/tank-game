@@ -15,11 +15,11 @@ var player_prefab = preload("res://Prefabs/player.tscn")
 #Called when the player has no actions remaining
 #Tells the Enemy Handler node that its the enemies' turn
 func _ready():
-	start_level(map_number)
+	start_level()
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if level_over:
-		start_level(map_number)
+		start_level()
 		
 func set_enemy_turn():
 	await get_tree().create_timer(0.1).timeout
@@ -42,6 +42,8 @@ func enemy_location(old_position, new_position):
 #Turns on the next level button
 func round_won():
 	NextLevelButton.visible = true
+	Player.level_complete()
+
 func _on_next_leve_l_button_pressed() -> void:
 	NextLevelButton.visible = false
 	end_level()
@@ -67,7 +69,7 @@ func reset_game():
 	map_number = 1
 	level_over = true
 	
-func start_level(map_number: int):
+func start_level():
 	player_turn = true
 	level_over = false
 	var new_map = load(map_folder + str(map_number) + ".tscn")
@@ -80,4 +82,4 @@ func start_level(map_number: int):
 	Player.map = Map
 	Map.player = Player
 	move_child(Map, 0)
-	EnemyHandler.spawn_enemies(Map.enemy_spawn)
+	EnemyHandler.spawn_enemies(Map.enemy_spawn, Map.hard_enemy_spawn)

@@ -6,6 +6,10 @@ extends Node
 #Hit mark that spawns when the bullet hits a tank
 var hit = preload("res://Prefabs/hit.tscn")
 
+func _ready():
+	await get_tree().create_timer(2).timeout
+	queue_free()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var direction = Vector2.RIGHT.rotated(self.rotation)  # Local forward direction
@@ -35,7 +39,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			
 
 #called when hitting tilemap wall
-func _on_area_2d_body_entered(body):
+func _on_area_2d_body_entered(_body):
 	var h = hit.instantiate()
 	get_parent().add_child(h)
 	h.global_position = self.global_position
