@@ -42,6 +42,8 @@ func enemy_location(old_position, new_position):
 #Turns on the next level button
 func round_won():
 	NextLevelButton.visible = true
+	Player.level_complete()
+
 func _on_next_leve_l_button_pressed() -> void:
 	NextLevelButton.visible = false
 	end_level()

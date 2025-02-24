@@ -149,3 +149,8 @@ func _on_end_turn_pressed() -> void:
 	UI_change(true, false, false)
 	actions_remaining = 0
 	action_taken()
+	
+func level_complete():
+	actions_remaining = 0
+	UI_change(false,false,false)
+	
