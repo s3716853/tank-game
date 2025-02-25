@@ -11,7 +11,7 @@ extends Node
 
 var level_over
 var player_turn
-var map_number = 1
+var map_number = 2
 var number_of_maps = 0
 
 var map_folder = "res://Scenes/Maps/map"

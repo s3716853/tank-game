@@ -120,6 +120,6 @@ text = "You Win"
 [node name="Decals" type="Node2D" parent="."]
 
 [connection signal="pressed" from="UI/RestartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="UI/WinGameButton" to="." method="_on_win_game_button_pressed"]
 [connection signal="pressed" from="UI/WinGameButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="UI/WinGameButton" to="." method="_on_win_game_button_pressed"]
 [connection signal="pressed" from="UI/NextLeveLButton" to="." method="_on_next_leve_l_button_pressed"]
